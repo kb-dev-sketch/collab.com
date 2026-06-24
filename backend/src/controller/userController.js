@@ -5,15 +5,16 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../model/user.model.js";
 
 const registerUser = asyncHandler(async (req, res) => {
+  console.log("registerUser hit");
   //take the user detail
   const { email, username, password, role } = req.body;
   // validation
-  if (!username || !email || password || role) {
+  if (!username || !email || !password || !role) {
     throw new ApiError(400, "all field are required");
   }
   // check existed user
   const existedUser = await User.findOne({
-    $or: [{ username: username.toLowerCase() }, { email: email.toLowerCase() }],
+    $or: [{ username }, { email }],
   });
   if (existedUser) {
     throw new ApiError(409, "username or email already existed");
@@ -38,6 +39,6 @@ const registerUser = asyncHandler(async (req, res) => {
   //response
   return res
     .status(201)
-    .json(new ApiResponse(201, createdUser, "user rregistered successfully"));
+    .json(new ApiResponse(201, createdUser, "user registered successfully"));
 });
 export { registerUser };
