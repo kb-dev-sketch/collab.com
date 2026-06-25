@@ -1,9 +1,8 @@
+import jwt from "jsonwebtoken";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
-
 import { User } from "../model/user.model.js";
-
 const generateAccessAndRefreshTokens = async (userId) => {
   console.log("Debug userId", userId);
   console.log("type", typeof userId);
@@ -127,8 +126,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   };
   return res
     .status(200)
-    .clearCookies("accessToken", options)
-    .clearCookies("refreshToken", options)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "User logged out "));
 });
 
