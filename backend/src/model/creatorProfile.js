@@ -63,7 +63,7 @@ const creatorSchema = new mongoose.Schema(
         default: "",
       },
       linkedin: {
-        type: true,
+        type: String,
         trim: true,
         default: "",
       },
