@@ -1,8 +1,8 @@
-import { Creator } from "../model/creatorProfile.js";
+import { Creator } from "../model/creatorProfile_model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-
+import mongoose from "mongoose";
 const creatorProfile = asyncHandler(async (req, res) => {
   const {
     name,
@@ -71,7 +71,7 @@ const update_creatorProfile = asyncHandler(async (req, res) => {
   ];
   // build update Object
   const updateData = {};
-  allowedFields.forEachEach((field) => {
+  allowedFields.forEach((field) => {
     if (req.body[field] !== undefined) {
       updateData[field] = req.body[field];
     }

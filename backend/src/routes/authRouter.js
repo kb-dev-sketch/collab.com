@@ -12,17 +12,32 @@ import {
   getCreatorById,
   getCreatorProfile,
   update_creatorProfile,
-} from "../controller/creatorProfile.js";
-import { verifyCreator } from "../middleware/verifyCreator.js";
+} from "../controller/creatorProfile_controller.js";
+import { verifyCreator } from "../middleware/verifyCreator_middleware.js";
+import {
+  createbrandProfile,
+  getbrandProfile,
+  updatebrandProfile,
+} from "../controller/brandProfile_controller.js";
+import { verifyBrand } from "../middleware/verifyBrand_middleware.js";
 const router = Router();
-
+// user
 router.route("/register").post(registerUser);
 router.route("/loginUser").post(loginUser);
 router.route("/logoutUser").post(verifyJWT, logoutUser);
 router.route("/refresh-Token").post(verifyJWT, refreshAccessToken);
 router.route("/getUser").get(verifyJWT, getCurrentUser);
+
+// create creator profile
 router.route("/creatorProfile").post(verifyJWT, creatorProfile);
 router.route("/update_creatorProfile").patch(verifyJWT, update_creatorProfile);
-router.route("/getcreatorProfile").get(verifyJWT,verifyCreator, getCreatorProfile);
-router.route("/:creatorId",verifyJWT,getCreatorById)
+router  .route("/getcreatorProfile").get(verifyJWT, verifyCreator, getCreatorProfile);
+router.route("/:creatorId").get(verifyJWT, getCreatorById);
+
+// create brand 
+router.route("/createBrand").post(verifyJWT, createbrandProfile);
+router.route("/getbrandprofile").get(verifyJWT, verifyBrand, getbrandProfile);
+router
+  .route("/updatebrandProfile")
+  .patch(verifyJWT, verifyBrand, updatebrandProfile);
 export { router };

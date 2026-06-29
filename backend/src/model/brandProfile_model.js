@@ -90,7 +90,7 @@ const brandSchema = new mongoose.Schema(
       default: false,
     },
     isVerified: {
-      type: Booolean,
+      type: Boolean,
       default: false,
     },
     isActive: {
@@ -98,7 +98,7 @@ const brandSchema = new mongoose.Schema(
       default: true,
     },
   },
-  { timeStamps },
+  { timestamps: true },
 );
 
 // Search indexes
@@ -107,4 +107,4 @@ brandSchema.index({ companyName: 1 });
 brandSchema.index({ industry: 1 });
 brandSchema.index({ location: 1 });
 
-export const Brand = mongoose.Model("Brand", brandSchema);
+export const Brand = mongoose.model("Brand", brandSchema);
