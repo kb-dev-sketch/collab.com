@@ -31,13 +31,18 @@ router.route("/getUser").get(verifyJWT, getCurrentUser);
 // create creator profile
 router.route("/creatorProfile").post(verifyJWT, creatorProfile);
 router.route("/update_creatorProfile").patch(verifyJWT, update_creatorProfile);
-router  .route("/getcreatorProfile").get(verifyJWT, verifyCreator, getCreatorProfile);
-router.route("/:creatorId").get(verifyJWT, getCreatorById);
+router
+  .route("/getcreatorProfile")
+  .get(verifyJWT, verifyCreator, getCreatorProfile);
 
-// create brand 
+// create brand
 router.route("/createBrand").post(verifyJWT, createbrandProfile);
-router.route("/getbrandprofile").get(verifyJWT, verifyBrand, getbrandProfile);
 router
   .route("/updatebrandProfile")
   .patch(verifyJWT, verifyBrand, updatebrandProfile);
-export { router };
+router.route("/getbrandProfile").get(verifyJWT, verifyBrand, getbrandProfile);
+
+// dynamic route
+router.route("/:creatorId").get(verifyJWT, getCreatorById);
+
+export {router};

@@ -40,7 +40,7 @@ const createbrandProfile = asyncHandler(async (req, res) => {
     );
 });
 const updatebrandProfile = asyncHandler(async (req, res) => {
-  const {
+  const allowedFields = [
     companyName,
     industry,
     Companysize,
@@ -48,7 +48,7 @@ const updatebrandProfile = asyncHandler(async (req, res) => {
     socials,
     website,
     desciption,
-  } = req.body;
+  ];
   const updateData = {};
   allowedFields.forEach((fields) => {
     if (req.body[fields] !== undefined) {
@@ -68,7 +68,7 @@ const updatebrandProfile = asyncHandler(async (req, res) => {
     },
     {
       new: true,
-      runvalidators: true,
+      runValidators: true,
     },
   );
   if (!brand) {
@@ -79,6 +79,7 @@ const updatebrandProfile = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, brand, "brand profile fetched successfully"));
 });
 const getbrandProfile = asyncHandler(async (req, res) => {
+  console.log("CONTROLLER HIT");
   const brand = await Brand.findOne({
     userId: req.user._id,
   });

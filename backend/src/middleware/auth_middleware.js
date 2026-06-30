@@ -4,6 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 // res khali hai toh mai toh _ likh sakta hu
 export const verifyJWT = asyncHandler(async (req, _, next) => {
+  console.log("verifyJWT Hit");
   const token =
     req.cookies?.accessToken ||
     req.header("authorization")?.replace("Bearer ", "");
