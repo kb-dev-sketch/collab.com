@@ -20,6 +20,13 @@ import {
   updatebrandProfile,
 } from "../controller/brandProfile_controller.js";
 import { verifyBrand } from "../middleware/verifyBrand_middleware.js";
+import {
+  createCampaign,
+  deleteCampaign,
+  getallCampaign,
+  getCampaignById,
+  updateCampaign,
+} from "../controller/campaign_controller.js";
 const router = Router();
 // user
 router.route("/register").post(registerUser);
@@ -42,7 +49,18 @@ router
   .patch(verifyJWT, verifyBrand, updatebrandProfile);
 router.route("/getbrandProfile").get(verifyJWT, verifyBrand, getbrandProfile);
 
+// CAMPAIGN ROUTES
+router.route("/createCampaign").post(verifyJWT, verifyBrand, createCampaign);
+router.route("/getallCampaign").get(verifyJWT, verifyBrand, getallCampaign);
+router
+  .route("/updateCampaign/:campaignId")
+  .patch(verifyJWT, verifyBrand, updateCampaign);
+router
+  .route("/deleteCampaign/:campaignId")
+  .delete(verifyJWT, verifyBrand, deleteCampaign);
 // dynamic route
+router
+  .route("/getCampaignById/:campaignId")
+  .get(verifyJWT, verifyBrand, getCampaignById);
 router.route("/:creatorId").get(verifyJWT, getCreatorById);
-
-export {router};
+export { router };
