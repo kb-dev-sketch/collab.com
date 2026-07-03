@@ -90,8 +90,11 @@ const updateCampaign = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Campaign not found");
   }
 
+  const brand = await Brand.findOne({
+    userId: req.user._id,
+  });
   // ownership check
-  if (campaign.brandId.toString() != req.user._id.toString()) {
+  if (campaign.brandId.toString() != brand._id.toString()) {
     throw new ApiError(403, "You are not authorized to update this campaign");
   }
   // Allowed fields
@@ -133,13 +136,17 @@ const deleteCampaign = asyncHandler(async (req, res) => {
   if (!campaign) {
     throw new ApiError(404, "Campaign not found");
   }
+  const brand = await Brand.findOne({
+    userId: req.user._id,
+  });
   // ownership check
-  if (campaign.brandId.toString() != req.user._id.toString()) {
+  if (campaign.brandId.toString() != brand._id.toString()) {
     throw new ApiError(403, "You are not authorized to delete this campaign");
   }
+
   // soft delete
   campaign.isActive = false;
-  campaign.status = "closed";
+  campaign.status = "Cancelled";
   await campaign.save();
   return res
     .status(200)
