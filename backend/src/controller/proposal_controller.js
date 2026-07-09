@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { Creator } from "../model/creatorProfile_model.js";
 import { Campaign } from "../model/campaign_model.js";
 import { Brand } from "../model/brandProfile_model.js";
+import { Chat } from "../model/chat.model.js";
 
 const createProposal = asyncHandler(async (req, res) => {
   const { campaignId, message, quotedPrice, deliveryDays } = req.body;
@@ -14,18 +15,18 @@ const createProposal = asyncHandler(async (req, res) => {
     throw new ApiError("All fields are required", 400);
   }
   if (!mongoose.Types.ObjectId.isValid(campaignId)) {
-    throw new ApiError("Invalid campaignId", 400);
+    throw new ApiError(400, "Invalid campaignId");
   }
   // logged-in creator
   const creator = await Creator.findOne({
     userId: req.user._id,
   });
   if (!creator) {
-    throw new ApiError("Creator profile not found", 404);
+    throw new ApiError(404, "Creator profile not found");
   }
   const campaign = await Campaign.findById(campaignId);
   if (!campaign) {
-    throw new ApiError("Campaign not found", 404);
+    throw new ApiError(404, "Campaign not found");
   }
   //  business rules
   if (campaign.status !== "Active") {
@@ -38,7 +39,7 @@ const createProposal = asyncHandler(async (req, res) => {
   });
 
   if (existingProposal) {
-    throw new ApiError("Proposal already exists for this campaign", 409);
+    throw new ApiError(409, "Proposal already exists for this campaign");
   }
 
   const newProposal = await Proposal.create({
@@ -209,12 +210,43 @@ const acceptProposal = asyncHandler(async (req, res) => {
   if (proposal.status !== "pending") {
     throw new ApiError(400, "only pending proposal can be accepted");
   }
-  //accept proposal
-  proposal.status = "accepted";
-  await proposal.save();
-  // update campaign proposal
-  campaign.status = "Active";
-  await campaign.save();
+  // check if chat already exist (Read operation)
+  const existingChat = await Chat.findOne({
+    proposalId: proposal._id,
+  });
+  // ---transaction ------
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    //accept proposal
+    proposal.status = "accepted";
+    await proposal.save({ session });
+    // update campaign proposal
+    campaign.status = "Active";
+    await campaign.save({ session });
+    // create chat if not exist
+
+    if (!existingChat) {
+      await Chat.create(
+        [
+          {
+            proposalId: proposal._id,
+            campaignId: campaign._id,
+            creatorId: proposal.creatorId,
+            brandId: proposal.brandId,
+          },
+        ],
+        { session },
+      );
+    }
+    await session.commitTransaction();
+  } catch (error) {
+    // ROLL back all changes
+    await session.abortTransaction;
+    throw error;
+  } finally {
+    session.endSession();
+  }
   // fetch updated proposal
   const updatedProposal = await Proposal.findById(proposal._id)
     .populate({

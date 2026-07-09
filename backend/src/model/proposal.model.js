@@ -25,7 +25,7 @@ const proposalSchema = new mongoose.Schema(
       trim: true,
       maxLength: 1000,
     },
-    quatedPrice: {
+    quotedPrice: {
       type: Number,
       required: true,
       min: 0,

@@ -22,6 +22,7 @@ import { brandRouter } from "./src/routes/brand.routes.js";
 import { campaignRouter } from "./src/routes/campaign.routes.js";
 import { errorHandler } from "./src/middleware/error.middleware.js";
 import { proposalRoute } from "./src/routes/proposal.routes.js";
+import { chatRouter } from "./src/routes/chat.routes.js";
 
 app.get("/", (req, res) => {
   res.send("Server Working");
@@ -31,6 +32,7 @@ app.use("/api/v1/creators", creatorRouter);
 app.use("/api/v1/brands", brandRouter);
 app.use("/api/v1/campaigns", campaignRouter);
 app.use("/api/v1/proposals", proposalRoute);
+app.use("/api/v1/chats", chatRouter);
 app.use(errorHandler);
 
 export { app };
