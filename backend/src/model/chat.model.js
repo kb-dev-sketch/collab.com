@@ -14,7 +14,7 @@ const chatSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
-
+    
     creatorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Creator",

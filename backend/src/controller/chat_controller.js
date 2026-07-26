@@ -2,6 +2,7 @@ import { Chat } from "../model/chat.model.js";
 import { Message } from "../model/message.model.js";
 import { Creator } from "../model/creatorProfile_model.js";
 import { Brand } from "../model/brandProfile_model.js";
+import { getIO } from "../sockets/socket.js";
 import mongoose from "mongoose";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -45,7 +46,7 @@ const getMyChats = asyncHandler(async (req, res) => {
         path: "creatorId",
         select: "name username email",
       })
-      .populatelate({
+      .populate({
         path: "campaignId",
         select: "title",
       })
@@ -182,6 +183,10 @@ const sendMessage = asyncHandler(async (req, res) => {
 
     await chat.save({ session });
     await session.commitTransaction();
+    const io = getIO();
+    io.to(chatId.toString()).emit("receive-message", {
+      message,
+    });
   } catch (error) {
     // roll back
     await session.abortTransaction();

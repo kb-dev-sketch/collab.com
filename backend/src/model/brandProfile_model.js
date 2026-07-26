@@ -79,10 +79,10 @@ const brandSchema = new mongoose.Schema(
       type: Number,
       default: 0,
       min: 0,
-      max: 0,
+      max: 5,
     },
     totalReviews: {
-      type: Boolean,
+      type: Number,
       default: 0,
     },
     profileCompleted: {
@@ -106,5 +106,6 @@ const brandSchema = new mongoose.Schema(
 brandSchema.index({ companyName: 1 });
 brandSchema.index({ industry: 1 });
 brandSchema.index({ location: 1 });
-
-export const Brand = mongoose.model("Brand", brandSchema);
+//export const Brand = mongoose.model("Brand", brandSchema);
+export const Brand =
+  mongoose.models.Brand || mongoose.model("Brand", brandSchema);

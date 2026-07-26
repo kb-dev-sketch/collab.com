@@ -225,7 +225,9 @@ const acceptProposal = asyncHandler(async (req, res) => {
     campaign.status = "Active";
     await campaign.save({ session });
     // create chat if not exist
-
+    console.log("proposal.brandId =", proposal.brandId);
+    console.log("campaign.brandId =", campaign.brandId);
+    console.log("proposal.creatorId =", proposal.creatorId);
     if (!existingChat) {
       await Chat.create(
         [
@@ -236,13 +238,18 @@ const acceptProposal = asyncHandler(async (req, res) => {
             brandId: proposal.brandId,
           },
         ],
+
         { session },
       );
     }
+    console.log({
+      creatorId: proposal.creatorId,
+      brandId: campaign.brandId,
+    });
     await session.commitTransaction();
   } catch (error) {
     // ROLL back all changes
-    await session.abortTransaction;
+    await session.abortTransaction();
     throw error;
   } finally {
     session.endSession();
