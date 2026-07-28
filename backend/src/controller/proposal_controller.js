@@ -2,6 +2,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Proposal } from "../model/proposal.model.js";
+import { Notification } from "../model/notification.model.js";
 import mongoose from "mongoose";
 import { Creator } from "../model/creatorProfile_model.js";
 import { Campaign } from "../model/campaign_model.js";
@@ -49,6 +50,19 @@ const createProposal = asyncHandler(async (req, res) => {
     message,
     quotedPrice,
     deliveryDays,
+  });
+
+  const brand = await Brand.findById(campaign.brandId);
+  if (!brand) {
+    throw new ApiError(404, "Brand profile not found");
+  }
+  await Notification.create({
+    recipientId: brand.userId,
+    senderId: req.user._id,
+    type: "proposal_received",
+    title: "New Proposal Received",
+    referenceId: newProposal_.id,
+    referenceModal: "Proposal",
   });
 
   return res
@@ -268,6 +282,21 @@ const acceptProposal = asyncHandler(async (req, res) => {
       path: "brandId",
       select: "companyName",
     });
+
+  const creator = await Creator.findById(proposal.creatorId);
+
+  if (!creator) {
+    throw new ApiError(404, "Creator profile not found");
+  }
+  await Notification.create({
+    recipientId: creator.userId,
+    senderId: req.user._id,
+    type: "proposal_accepted",
+    title: "Proposal Accepted",
+    message: "Your proposal has been accepted.",
+    referenceId: proposal._id,
+    referenceModel: "Proposal",
+  });
 
   return res
     .status(200)
