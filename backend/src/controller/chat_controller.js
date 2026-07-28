@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { Notification } from "../model/notification.model.js";
 
 const getMyChats = asyncHandler(async (req, res) => {
   let chats = [];
@@ -194,7 +195,30 @@ const sendMessage = asyncHandler(async (req, res) => {
   } finally {
     await session.endSession();
   }
+
   //response
+  let recipientId;
+  // if creator is sender
+  if (req.user.role === "creator") {
+    const brand = await Brand.findById(chat.brandId);
+    recipientId = brand.userId;
+  }
+
+  // if brand is sender
+  if (req.user.role === "brand") {
+    const creator = await Creator.findById(chat.creatorId);
+    recipientId = creator.userId;
+  }
+  // create notification
+  await Notification.create({
+    recipientId,
+    senderId: req.user._id,
+    type: "new_message",
+    title: "New Message",
+    message: text.trim(),
+    referenceId: chat.id,
+    referenceModel: "Chat",
+  });
   return res
     .status(201)
     .json(new ApiResponse(201, message, "Message sent successfully"));
