@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Notification } from "../model/notification.model";
+import { Notification } from "../model/notification.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";

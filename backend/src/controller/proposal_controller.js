@@ -33,11 +33,14 @@ const createProposal = asyncHandler(async (req, res) => {
   if (campaign.status !== "Active") {
     throw new ApiError(400, "this campaign is not longer accepting proposals");
   }
-
+  console.log("Campaign ID:", campaignId);
+  console.log("Creator ID:", creator._id);
   const existingProposal = await Proposal.findOne({
     campaignId,
     creatorId: creator._id,
   });
+  console.log("Existing Proposal:", existingProposal);
+  console.log("Type:", typeof existingProposal);
 
   if (existingProposal) {
     throw new ApiError(409, "Proposal already exists for this campaign");
@@ -61,10 +64,11 @@ const createProposal = asyncHandler(async (req, res) => {
     senderId: req.user._id,
     type: "proposal_received",
     title: "New Proposal Received",
-    referenceId: newProposal_.id,
-    referenceModal: "Proposal",
+    message: `${creator.name} sent you a proposal.`,
+    referenceId: newProposal._id,
+    referenceModel: "Proposal",
   });
-
+  console.log("Notification Created:", Notification);
   return res
     .status(201)
     .json(new ApiResponse(201, newProposal, "Proposal created successfully"));
