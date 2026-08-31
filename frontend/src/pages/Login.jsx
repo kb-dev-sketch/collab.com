@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {useState} from "react";
 import { loginUser } from "../services/auth";
-import { getCreatorProfile } from "../services/creator";
+import { getCreatorProfile } from "../services/creator.js";
 import { useNavigate } from "react-router-dom";
 import {useAuth} from '../context/AuthContext.jsx'
 import { getbrandProfile } from "../services/brand.js";

@@ -3,37 +3,62 @@ import { AuthContext } from "../context/AuthContext";
 import Sidebar from "../components/Sidebar";
 import { getAllCampaigns } from "../services/campaign";
 import Loader from "../components/Loader";
+import { getProposalBycampaignId } from "../services/proposal";
 
 function BrandDashboard() {
     
   const { user, loading } = useContext(AuthContext);
 const [campaigns,setCampaigns]=useState([])
-const [campaignLoading,setCampaignLoading]=useState(true)
-
+const [loadingData,setLoadingData]=useState(true)
+const [proposals,setProposals]=useState([])
  useEffect(()=>{
-    const fetchCampaigns=async()=>{
+    const fetchDashboardData=async()=>{
         try{
             const response=await getAllCampaigns();
-            console.log("Brand Campaigns:",response.data)
-            setCampaigns(response.data)
+            const campaignData=response.data
+            console.log("Brand Campaigns:",campaignData)
+            setCampaigns(campaignData)
+            // get proposal for each campaign
+            const proposalResponse=await Promise.all(
+              campaignData.map((campaign)=>
+              getProposalBycampaignId(campaign._id)
+            )
+            )
+            console.log(
+  "Campaign IDs:",
+  campaignData.map((campaign) => campaign._id)
+);
+            // extract proposal from response
+            const allProposals=proposalResponse.flat();
+            console.log("Brand Proposals",allProposals)
+            setProposals(allProposals)
         }
         catch(error){
        console.error(error)
         }
         finally{
-            setCampaignLoading(false)
+            setLoadingData(false)
         }
     }
-    fetchCampaigns();
+    fetchDashboardData();
 
  },[])
- if(loading || campaignLoading){
+ if(loading ||loadingData){
     return <Loader />
  }
  const activeCampaigns=campaigns.filter(
-    (campaign)=>campaign.status==="active"
+    (campaign)=>campaign.status==="Active"
+ )
+ const completedCampaigns=campaigns.filter(
+  (campaign)=>campaign.status==="Completed"
  )
 
+const pendingProposals=proposals.filter(
+  (proposal)=>proposal.status==="pending"
+)
+const acceptedProposals=proposals.filter(
+  (proposal)=>proposal.status="accepted"
+)
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
@@ -62,21 +87,21 @@ const [campaignLoading,setCampaignLoading]=useState(true)
           </div>
 
           <div className="rounded-xl bg-white p-6 shadow">
-            <h2 className="text-3xl font-bold">0</h2>
+            <h2 className="text-3xl font-bold">{pendingProposals.length}</h2>
             <p className="mt-1 text-gray-500">
               Pending Proposals
             </p>
           </div>
 
           <div className="rounded-xl bg-white p-6 shadow">
-            <h2 className="text-3xl font-bold">0</h2>
+            <h2 className="text-3xl font-bold">{acceptedProposals.length}</h2>
             <p className="mt-1 text-gray-500">
               Ongoing Collaborations
             </p>
           </div>
 
           <div className="rounded-xl bg-white p-6 shadow">
-            <h2 className="text-3xl font-bold">0</h2>
+            <h2 className="text-3xl font-bold">{completedCampaigns.length}</h2>
             <p className="mt-1 text-gray-500">
               Completed Campaigns
             </p>

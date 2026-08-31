@@ -58,12 +58,39 @@ const createCampaign = asyncHandler(async (req, res) => {
 });
 
 const getallCampaign = asyncHandler(async (req, res) => {
-  const campaigns = await Campaign.find()
-    .populate("brandId")
-    .sort({ createdAt: -1 });
+  let campaigns;
+  if (req.user.role == "brand") {
+    const brand = await Brand.findOne({
+      userId: req.user._id,
+    });
+    if (!brand) {
+      throw new ApiError(404, "Brand Profile not found");
+    }
+    campaigns = await Campaign.find({
+      brandId: brand._id,
+      status: { $ne: "Cancelled" },
+    })
+      .populate({
+        path: "brandId",
+        select: "companyName website",
+      })
+      .sort({ createdAt: -1 });
+  } else if (req.user.role === "creator") {
+    campaigns = await Campaign.find({
+      status: "Active",
+    })
+      .populate({
+        path: "brandId",
+        select: "companyName website",
+      })
+      .sort({ createdAt: -1 });
+  } else {
+    throw new ApiError(403, "unauthorised role");
+  }
+
   return res
     .status(200)
-    .json(new ApiResponse(200, campaigns, "Campaign fetched successfully"));
+    .json(new ApiResponse(200, campaigns, "Campaigns fetched successfully"));
 });
 const getCampaignById = asyncHandler(async (req, res) => {
   const { campaignId } = req.params;

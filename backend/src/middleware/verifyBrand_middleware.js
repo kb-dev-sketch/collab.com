@@ -6,6 +6,7 @@ const verifyBrand = (req, res, next) => {
   if (req.user.role !== "brand") {
     throw new ApiError(403, "only brand can access this resource");
   }
+  console.log("verifyBrand");
   next();
 };
 export { verifyBrand };

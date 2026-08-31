@@ -2,7 +2,7 @@ import API from "./api";
 
 export const getCreatorProfile = async () => {
   try {
-    const response = await API.get("/creators/creatorProfile");
+    const response = await API.get("/creators/getcreatorProfile");
     return response.data;
   } catch (error) {
     console.error("Error fetching creator profile:", error);
@@ -10,18 +10,15 @@ export const getCreatorProfile = async () => {
   }
 };
 
-export const createCreatorProfile=async(profileData)=>{
-  const response=await API.post(
-    "/creator/creatorProfile",
-    profileData
-  );
-  return response.data
-}
+export const createCreatorProfile = async (profileData) => {
+  const response = await API.post("/creators/creatorProfile", profileData);
+  return response.data;
+};
 
-export const updateCreatorProfile=async(profileData)=>{
-  const response=await API.patch(
-    "/creator/update_creatorProfile",
-    profileData
+export const updateCreatorProfile = async (profileData) => {
+  const response = await API.patch(
+    "/creators/update_creatorProfile",
+    profileData,
   );
-  return response.data
-}
+  return response.data;
+};

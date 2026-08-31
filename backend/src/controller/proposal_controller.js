@@ -118,13 +118,11 @@ const getProposalById = asyncHandler(async (req, res) => {
 
 const getProposalsByCampaign = asyncHandler(async (req, res) => {
   const { campaignId } = req.params;
+  // validate campaignId
   if (!mongoose.Types.ObjectId.isValid(campaignId)) {
     throw new ApiError(400, "Invalid campaignId");
   }
 
-  if (!proposals) {
-    throw new ApiError(404, "No proposals found for this campaign");
-  }
   // logged in brand
   const brand = await Brand.findOne({
     userId: req.user._id,
@@ -132,7 +130,7 @@ const getProposalsByCampaign = asyncHandler(async (req, res) => {
   if (!brand) {
     throw new ApiError(403, "you are not authorise to view these proposals");
   }
-  // campaign exists?
+  //  check campaign exists?
   const campaign = await Campaign.findById(campaignId);
   if (!campaign) {
     throw new ApiError(404, "Campaign not found");
@@ -142,11 +140,11 @@ const getProposalsByCampaign = asyncHandler(async (req, res) => {
     throw new ApiError(403, "you are not authorise to view these proposals");
   }
 
-  if (!brand || !proposals.brandId.equals(brand._id)) {
-    throw new ApiError(403, "you are not authorise to view these proposals");
-  }
   // FETCH ALL PROPOSALS FOR THIS CAMPAIGN
-  const proposals = await Proposal.find({ campaignId, IsDeleted: false })
+  const proposals = await Proposal.find({
+    campaignId: campaignId,
+    isDeleted: false,
+  })
     .populate({
       path: "creatorId",
       select: "username email",
@@ -154,6 +152,9 @@ const getProposalsByCampaign = asyncHandler(async (req, res) => {
     .sort({
       createdAt: -1,
     });
+  // if (!proposals || proposals.length === 0) {
+  //   throw new ApiError(404, "No proposals found for this campaign");
+  // }
   return res
     .status(200)
     .json(new ApiResponse(200, proposals, "Proposals fetched successfully"));
