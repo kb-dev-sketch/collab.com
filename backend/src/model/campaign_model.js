@@ -5,19 +5,19 @@ const campaignSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Brand",
       required: true,
-      index:true,
+      index: true,
     },
     title: {
       type: String,
       required: true,
       trim: true,
-      maxlength:150,
+      maxlength: 150,
     },
     description: {
       type: String,
       required: true,
       trim: true,
-      maxlength:3000
+      maxlength: 3000,
     },
     niches: [
       {
@@ -41,7 +41,14 @@ const campaignSchema = new mongoose.Schema(
     platforms: [
       {
         type: String,
-        enum: ["Instagram", "Youtube", "Twitter", "Linkedin", "Facebook"],
+        enum: [
+          "Instagram",
+          "YouTube",
+          "TikTok",
+          "Twitter",
+          "LinkedIn",
+          "Facebook",
+        ],
       },
     ],
     budget: {

@@ -7,6 +7,7 @@ import Campaigns from "./pages/Campaigns";
 import CreatorProfile from "./pages/creatorProfile";
 import ProtectedRoute from './components/ProtectedRoute';
 import BrandDashboard from './pages/BrandDashBoard';
+import CreateCampaign from './pages/create-campaign';
 function App(){
   return (
 
@@ -15,6 +16,7 @@ function App(){
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 <Route path="/campaigns" element={<Campaigns />} />
+<Route path="/CreateCampaign" element={<CreateCampaign />} />
       <Route path="/creator-profile"
        element={
        <ProtectedRoute>

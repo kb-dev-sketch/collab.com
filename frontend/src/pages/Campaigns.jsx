@@ -65,7 +65,7 @@ function Campaigns() {
 
           {user?.role === "brand" && (
             <button
-              onClick={() => navigate("/create-campaign")}
+              onClick={() => navigate("/CreateCampaign")}
               className="rounded-lg bg-blue-600 px-5 py-3 font-medium text-white hover:bg-blue-700"
             >
               + Create Campaign
@@ -93,7 +93,7 @@ function Campaigns() {
 
             {user?.role === "brand" && (
               <button
-                onClick={() => navigate("/create-campaign")}
+                onClick={() => navigate("/CreateCampaign")}
                 className="mt-5 rounded-lg bg-blue-600 px-5 py-3 text-white"
               >
                 Create Your First Campaign
@@ -122,4 +122,4 @@ function Campaigns() {
   );
 }
 
-export default Campaigns;
+export default Campaigns
