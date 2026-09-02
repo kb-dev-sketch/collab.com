@@ -10,3 +10,13 @@ export const getProposalBycampaignId = async (campaignId) => {
     console.error(" error fetching in proposals", error);
   }
 };
+
+export const createProposal = async (proposalData) => {
+  try {
+    const response = await API.post("/proposals/createProposal", proposalData);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating proposal:", error);
+    throw error; // Rethrow the error to be handled by the caller
+  }
+};

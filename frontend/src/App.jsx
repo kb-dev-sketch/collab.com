@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import BrandDashboard from './pages/BrandDashBoard';
 import CreateCampaign from './pages/create-campaign';
 import CampaignDetails from "./pages/CampaignDetails";
+import SendProposal from "./pages/sendProposal";
 function App(){
   return (
 
@@ -18,13 +19,20 @@ function App(){
       <Route path="/signup" element={<Signup />} />
 <Route path="/campaigns" element={<Campaigns />} />
 <Route path="/CreateCampaign" element={<CreateCampaign />} />
-import CampaignDetails from "./pages/CampaignDetails";
-
 <Route
   path="/campaign/:campaignId"
   element={
     <ProtectedRoute>
       <CampaignDetails />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/campaign/:campaignId/proposal"
+  element={
+    <ProtectedRoute>
+      <SendProposal />
     </ProtectedRoute>
   }
 />
