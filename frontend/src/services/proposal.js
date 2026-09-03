@@ -20,3 +20,12 @@ export const createProposal = async (proposalData) => {
     throw error; // Rethrow the error to be handled by the caller
   }
 };
+
+export const getProposalById = async (proposalId) => {
+  try {
+    const response = await API.get(`/proposals/getproposal/${proposalId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching proposal:", error);
+  }
+};

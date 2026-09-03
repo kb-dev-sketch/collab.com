@@ -10,6 +10,7 @@ import BrandDashboard from './pages/BrandDashBoard';
 import CreateCampaign from './pages/create-campaign';
 import CampaignDetails from "./pages/CampaignDetails";
 import SendProposal from "./pages/sendProposal";
+import CampaignProposals from "./pages/CampaignProposals";
 function App(){
   return (
 
@@ -36,7 +37,13 @@ function App(){
     </ProtectedRoute>
   }
 />
-
+<Route path="/campaign/:campaignId/proposals" 
+element={
+<ProtectedRoute>
+  <CampaignProposals />
+</ProtectedRoute>
+}
+/>
       <Route path="/creator-profile"
        element={
        <ProtectedRoute>
