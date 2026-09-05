@@ -21,7 +21,7 @@ import {
   FiDollarSign,
   FiCheckCircle,
   FiArrowRight,
-  FiCamera,
+  
 } from "react-icons/fi";
 
 function CreatorProfile() {
