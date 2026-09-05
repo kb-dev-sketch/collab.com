@@ -27,6 +27,10 @@ function Sidebar() {
       ? "/creator-dashboard"
       : "/brand-dashboard";
 
+      const proposalPath =
+      user?.role === "brand"
+        ? "/brand-proposals"
+        : "/creator-proposals";
   return (
     <aside className="sticky top-0 flex h-screen w-72 shrink-0 flex-col border-r border-slate-200 bg-white px-4 py-5 shadow-sm">
 
@@ -130,7 +134,7 @@ function Sidebar() {
 
           <li>
             <Link
-              to="/proposals"
+              to={proposalPath}
               className="group flex items-center gap-3 rounded-xl px-4 py-3 text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
             >
               <FiFileText size={20} />

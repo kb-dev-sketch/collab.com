@@ -11,6 +11,7 @@ import CreateCampaign from './pages/create-campaign';
 import CampaignDetails from "./pages/CampaignDetails";
 import SendProposal from "./pages/sendProposal";
 import CampaignProposals from "./pages/CampaignProposals";
+import BrandProposals from './pages/BrandProposals';
 function App(){
   return (
 
@@ -63,6 +64,14 @@ element={
 </ProtectedRoute>
 }
 />
+   
+
+    <Route path="/brand-proposals" element={
+      <ProtectedRoute>
+        <BrandProposals />
+      </ProtectedRoute>
+    }
+    />
     </Routes>
   )
 }
