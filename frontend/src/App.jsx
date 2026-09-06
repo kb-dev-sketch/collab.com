@@ -12,6 +12,7 @@ import CampaignDetails from "./pages/CampaignDetails";
 import SendProposal from "./pages/sendProposal";
 import CampaignProposals from "./pages/CampaignProposals";
 import BrandProposals from './pages/BrandProposals';
+import CreatorProposals from './pages/creatorProposals';
 function App(){
   return (
 
@@ -69,6 +70,13 @@ element={
     <Route path="/brand-proposals" element={
       <ProtectedRoute>
         <BrandProposals />
+      </ProtectedRoute>
+    }
+    />
+
+        <Route path="/creator-proposals" element={
+      <ProtectedRoute>
+        <CreatorProposals />
       </ProtectedRoute>
     }
     />

@@ -310,10 +310,44 @@ const acceptProposal = asyncHandler(async (req, res) => {
     );
 });
 
+const myProposals = asyncHandler(async (req, res) => {
+  const creator = await Creator.findOne({
+    userId: req.user._id,
+  });
+
+  if (!creator) {
+    throw new ApiError(404, "Creator not found");
+  }
+
+  try {
+    const proposals = await Proposal.find({
+      creatorId: creator._id,
+    })
+      .populate({
+        path: "campaignId",
+        select:
+          "title description budget niches startDate endDate status brandId",
+      })
+      .populate({
+        path: "brandId",
+        select: "companyName",
+      });
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, proposals, "My proposals fetched successfully"),
+      );
+  } catch (error) {
+    throw new ApiError(500, "Failed to fetch proposals");
+  }
+});
+
 export {
   createProposal,
   getProposalById,
   getProposalsByCampaign,
   updateProposal,
   acceptProposal,
+  myProposals,
 };

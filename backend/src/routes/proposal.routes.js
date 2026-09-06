@@ -9,6 +9,7 @@ import {
   getProposalById,
   getProposalsByCampaign,
   updateProposal,
+  myProposals,
 } from "../controller/proposal_controller.js";
 router.route("/createProposal").post(verifyJWT, verifyCreator, createProposal);
 router
@@ -23,5 +24,6 @@ router
 router
   .route("/acceptProposal/:proposalId")
   .post(verifyJWT, verifyBrand, acceptProposal);
+router.route("/myProposals").get(verifyJWT, verifyCreator, myProposals);
 
 export { router as proposalRoute };

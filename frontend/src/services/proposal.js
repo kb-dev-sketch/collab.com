@@ -29,3 +29,11 @@ export const getProposalById = async (proposalId) => {
     console.error("Error fetching proposal:", error);
   }
 };
+export const myProposals = async () => {
+  try {
+    const response = await API.get("/proposals/myProposals");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching my proposals:", error);
+  }
+};
