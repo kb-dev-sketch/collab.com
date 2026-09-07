@@ -358,7 +358,7 @@ function BrandDashboard() {
 
               {/* Create Campaign */}
               <button
-                onClick={() => navigate("/create-campaign")}
+                onClick={() => navigate("/CreateCampaign")}
                 className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100/60"
               >
 

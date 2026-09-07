@@ -14,6 +14,7 @@ import CampaignProposals from "./pages/CampaignProposals";
 import BrandProposals from './pages/BrandProposals';
 import CreatorProposals from './pages/creatorProposals';
 import BrandProfile from './pages/brandProfile';
+import BrandProfileView from './pages/BrandProfileView';
 function App(){
   return (
 
@@ -72,6 +73,12 @@ element={
     <Route path="/brand-proposals" element={
       <ProtectedRoute>
         <BrandProposals />
+      </ProtectedRoute>
+    }
+    />
+<Route path="/brand-profile-view" element={
+      <ProtectedRoute>
+        <BrandProfileView />
       </ProtectedRoute>
     }
     />
