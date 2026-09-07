@@ -13,6 +13,7 @@ import SendProposal from "./pages/sendProposal";
 import CampaignProposals from "./pages/CampaignProposals";
 import BrandProposals from './pages/BrandProposals';
 import CreatorProposals from './pages/creatorProposals';
+import BrandProfile from './pages/brandProfile';
 function App(){
   return (
 
@@ -22,6 +23,7 @@ function App(){
       <Route path="/signup" element={<Signup />} />
 <Route path="/campaigns" element={<Campaigns />} />
 <Route path="/CreateCampaign" element={<CreateCampaign />} />
+<Route path="/brand-profile" element={<BrandProfile />} />
 <Route
   path="/campaign/:campaignId"
   element={
