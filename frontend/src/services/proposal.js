@@ -37,3 +37,20 @@ export const myProposals = async () => {
     console.error("Error fetching my proposals:", error);
   }
 };
+
+export const acceptProposal = async (proposalId) => {
+  try {
+    const response = await API.patch(`/proposals/acceptProposal/${proposalId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error accepting proposal:", error);
+  }
+};
+export const rejectProposal = async (proposalId) => {
+  try {
+    const response = await API.post(`/proposals/rejectProposal/${proposalId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error rejecting proposal:", error);
+  }
+};

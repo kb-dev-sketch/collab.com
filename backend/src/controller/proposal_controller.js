@@ -236,6 +236,12 @@ const acceptProposal = asyncHandler(async (req, res) => {
   // ---transaction ------
   const session = await mongoose.startSession();
   try {
+    console.log("========== ACCEPT PROPOSAL START ==========");
+    console.log("proposalId:", proposalId);
+    console.log("proposal:", proposal);
+    console.log("brand:", brand);
+    console.log("campaign:", campaign);
+    console.log("existingChat:", existingChat);
     session.startTransaction();
     //accept proposal
     proposal.status = "accepted";
@@ -268,6 +274,11 @@ const acceptProposal = asyncHandler(async (req, res) => {
     await session.commitTransaction();
   } catch (error) {
     // ROLL back all changes
+    console.error("========== ACCEPT PROPOSAL ERROR ==========");
+    console.error("Message:", error.message);
+    console.error("Full Error:", error);
+    console.error("Stack:", error.stack);
+
     await session.abortTransaction();
     throw error;
   } finally {

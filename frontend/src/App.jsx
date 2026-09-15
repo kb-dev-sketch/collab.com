@@ -15,6 +15,7 @@ import BrandProposals from './pages/BrandProposals';
 import CreatorProposals from './pages/creatorProposals';
 import BrandProfile from './pages/brandProfile';
 import BrandProfileView from './pages/BrandProfileView';
+import Notifications from './pages/Notifications';
 function App(){
   return (
 
@@ -89,8 +90,18 @@ element={
       </ProtectedRoute>
     }
     />
-    </Routes>
-  )
+
+
+    <Route
+  path="/notifications"
+  element={
+    <ProtectedRoute>
+      <Notifications />
+    </ProtectedRoute>
+  }
+  />
+</Routes>
+  );
 }
 
 

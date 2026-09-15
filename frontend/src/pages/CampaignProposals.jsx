@@ -5,7 +5,11 @@ import Sidebar from "../components/Sidebar";
 import Loader from "../components/Loader";
 
 import { AuthContext } from "../context/AuthContext";
-import { getProposalBycampaignId } from "../services/proposal";
+import { 
+  getProposalBycampaignId ,
+  acceptProposal,
+  rejectProposal
+} from "../services/proposal";
 
 import {
   FiArrowLeft,
@@ -34,7 +38,10 @@ function CampaignProposals() {
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+   // accept proposal and reject proposal states
+   const [actionLoading, setActionLoading] = useState(null);
+   const [actionError, setActionError] = useState("");
+   
   useEffect(() => {
     const fetchProposals = async () => {
       try {
@@ -60,6 +67,55 @@ function CampaignProposals() {
 
     fetchProposals();
   }, [campaignId]);
+  // handle accept proposal
+
+  const handleAccept=async(proposalId)=>{
+    try{
+      setActionLoading(proposalId);
+      setActionError("");
+      await acceptProposal(proposalId);
+      //update the proposal status in the state
+      setProposals((prevProposals)=>
+      prevProposals.map((proposal)=>
+      proposal._id===proposalId
+    ?{...proposal,status:"accepted"}
+  :proposal))
+    }
+    catch(error){
+      console.error("Error accepting proposal:",error);
+      setActionError(
+        error.response?.data?.message ||
+          "Failed to accept proposal. Please try again."
+      );
+    }
+    finally{
+      setActionLoading(null);
+    }
+  };
+  // handle reject  proposal
+  const handleReject=async(proposalId)=>{
+    try{
+      setActionLoading(proposalId);
+      setActionError("");
+      await rejectProposal(proposalId);
+      // update the proposal status in the state
+      setProposals((prevProposals)=>
+      prevProposals.map((proposal)=>
+      proposal._id===proposalId
+    ?{...proposal,status:"rejected"}
+  :proposal))
+    }
+  catch(error){
+      console.error("Error rejecting proposal:",error);
+      setActionError(
+        error.response?.data?.message ||
+          "Failed to reject proposal. Please try again."
+      );
+    }
+    finally{
+      setActionLoading(null);
+    }
+  };
 
   if (authLoading || loading) {
     return <Loader />;
@@ -651,30 +707,39 @@ function CampaignProposals() {
                         </div>
 
 
-                        {/* ================= ACTIONS ================= */}
-                        {proposal.status === "pending" && (
+                       
+                       {/* ================= ACTIONS ================= */}
+                       {proposal.status === "pending" && (
+                         <div className="mt-7 flex flex-col gap-3 border-t border-blue-100 pt-6 sm:flex-row sm:justify-end">
+    {/* Reject */}
+    <button
+      type="button"
+      onClick={() => handleReject(proposal._id)}
+      disabled={actionLoading === proposal._id}
+      className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-6 py-3 font-semibold text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <FiX size={17} />
 
-                          <div className="mt-7 flex flex-col gap-3 border-t border-blue-100 pt-6 sm:flex-row sm:justify-end">
+      {actionLoading === proposal._id
+        ? "Processing..."
+        : "Reject"}
+    </button>
 
-                            <button
-                              type="button"
-                              className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-6 py-3 font-semibold text-red-600 transition hover:bg-red-50"
-                            >
-                              <FiX size={17} />
-                              Reject
-                            </button>
+    {/* Accept */}
+    <button
+      type="button"
+      onClick={() => handleAccept(proposal._id)}
+      disabled={actionLoading === proposal._id}
+      className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <FiCheck size={17} />
 
-                            <button
-                              type="button"
-                              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700"
-                            >
-                              <FiCheck size={17} />
-                              Accept Proposal
-                            </button>
-
-                          </div>
-
-                        )}
+      {actionLoading === proposal._id
+        ? "Processing..."
+        : "Accept Proposal"}
+    </button>
+  </div>
+)}
 
                       </div>
 

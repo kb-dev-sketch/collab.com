@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Loader from "../components/Loader.jsx";
-
+import NotificationBell from "./NotificationBell.jsx";
 import {
   FiGrid,
   FiBriefcase,
@@ -56,6 +56,13 @@ function Sidebar() {
           </div>
         </Link>
       </div>
+
+    <div className="mb-6 px-2">
+        <NotificationBell />
+      </div>
+
+
+  {/* page content */}
 
       {/* ================= USER ROLE ================= */}
 

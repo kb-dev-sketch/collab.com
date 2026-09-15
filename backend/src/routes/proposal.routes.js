@@ -23,7 +23,7 @@ router
   .patch(verifyJWT, verifyCreator, updateProposal);
 router
   .route("/acceptProposal/:proposalId")
-  .post(verifyJWT, verifyBrand, acceptProposal);
+  .patch(verifyJWT, verifyBrand, acceptProposal);
 router.route("/myProposals").get(verifyJWT, verifyCreator, myProposals);
 
 export { router as proposalRoute };
