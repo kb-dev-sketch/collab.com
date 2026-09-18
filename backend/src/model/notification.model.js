@@ -42,7 +42,7 @@ const notificationSchema = new mongoose.Schema(
     },
     referenceModel: {
       type: String,
-      enum: ["Proposal", "Campaign", "Message", "Review"],
+      enum: ["Proposal", "Campaign", "Chat", "Review"],
       required: true,
     },
     isRead: {

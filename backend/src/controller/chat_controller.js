@@ -40,8 +40,8 @@ const getMyChats = asyncHandler(async (req, res) => {
       throw new ApiError(404, "Brand profile not found");
     }
     chats = await Chat.find({
-      brandId: "creatorId",
-      isAcctive: true,
+      brandId: brand._id,
+      isActive: true,
     })
       .populate({
         path: "creatorId",
@@ -119,6 +119,9 @@ const getChatMessages = asyncHandler(async (req, res) => {
 
 const sendMessage = asyncHandler(async (req, res) => {
   // validate
+  console.log("========== SEND MESSAGE ==========");
+  console.log("BODY:", req.body);
+  console.log("TEXT:", req.body?.text);
   const { chatId } = req.params;
   if (!mongoose.Types.ObjectId.isValid(chatId)) {
     throw new ApiError(400, "Invalid chat id");

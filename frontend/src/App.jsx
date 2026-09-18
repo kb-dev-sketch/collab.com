@@ -16,6 +16,7 @@ import CreatorProposals from './pages/creatorProposals';
 import BrandProfile from './pages/brandProfile';
 import BrandProfileView from './pages/BrandProfileView';
 import Notifications from './pages/Notifications';
+import Messages from './pages/Messages';
 function App(){
   return (
 
@@ -100,6 +101,16 @@ element={
     </ProtectedRoute>
   }
   />
+
+
+  <Route
+  path="/messages"
+  element={
+    <ProtectedRoute>
+      <Messages />
+    </ProtectedRoute>
+  }
+/>
 </Routes>
   );
 }
