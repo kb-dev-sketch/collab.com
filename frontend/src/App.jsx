@@ -17,6 +17,7 @@ import BrandProfile from './pages/brandProfile';
 import BrandProfileView from './pages/BrandProfileView';
 import Notifications from './pages/Notifications';
 import Messages from './pages/Messages';
+import Settings from './pages/Settings';
 function App(){
   return (
 
@@ -111,6 +112,18 @@ element={
     </ProtectedRoute>
   }
 />
+
+
+
+  <Route
+  path="/settings"
+  element={
+    <ProtectedRoute>
+      <Settings />
+    </ProtectedRoute>
+  }
+/>
+
 </Routes>
   );
 }
