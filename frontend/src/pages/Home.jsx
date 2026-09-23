@@ -30,7 +30,7 @@ function Home() {
             <h1 className="text-5xl font-extrabold leading-tight tracking-tight sm:text-6xl">
               Connect Brands with
               <span className="block text-blue-600">
-                Influencers 🚀
+                Influencers 
               </span>
             </h1>
 
