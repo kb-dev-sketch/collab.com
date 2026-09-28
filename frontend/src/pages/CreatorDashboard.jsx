@@ -260,7 +260,7 @@ function CreatorDashboard() {
 
               {/* My Proposals */}
               <button
-                onClick={() => navigate("/proposals")}
+                onClick={() => navigate("/creator-proposals")}
                 className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
               >
                 <div className="flex items-center gap-4">

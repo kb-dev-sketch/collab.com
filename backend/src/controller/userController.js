@@ -3,6 +3,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../model/user.model.js";
+import bcrypt from "bcrypt";
 const generateAccessAndRefreshTokens = async (userId) => {
   console.log("Debug userId", userId);
   console.log("type", typeof userId);
@@ -166,7 +167,8 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 // change password
 const changePassword = asyncHandler(async (req, res) => {
   const { currentPassword, newPassword } = req.body;
-
+  console.log(currentPassword);
+  console.log(newPassword);
   // Valid Input
   if (!currentPassword || !newPassword) {
     throw new ApiError(400, "Please provide current and new password");
@@ -189,18 +191,14 @@ const changePassword = asyncHandler(async (req, res) => {
   if (!isPasswordCorrect) {
     throw new ApiError(400, "Current password is incorrect");
   }
-  if (!isPasswordCorrect) {
-    throw new ApiError(400, "Current password is incorrect");
-  }
+
   // prevent same Password
   const samePassword = await bcrypt.compare(newPassword, user.password);
-
-  if (!samePassword) {
+  if (samePassword) {
     throw new ApiError(400, "new password should not be same as old Password");
   }
 
   // hashed new Password
-  // const hashedPassword = await bcrypt.hash(newPassword, 10);
   // user.password = hashedPassword;
   user.password = newPassword;
   await user.save();

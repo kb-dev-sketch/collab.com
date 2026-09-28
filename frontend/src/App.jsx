@@ -18,6 +18,7 @@ import BrandProfileView from './pages/BrandProfileView';
 import Notifications from './pages/Notifications';
 import Messages from './pages/Messages';
 import Settings from './pages/Settings';
+import CreatorProfileView from './pages/creatorProfileview';
 function App(){
   return (
 
@@ -65,6 +66,15 @@ element={
       </ProtectedRoute>
       }
       />
+// creator -profile view
+<Route path="/creator-profile-view" element=
+      {<ProtectedRoute>
+      <CreatorProfileView />
+      </ProtectedRoute>
+      }
+      />
+
+
 <Route path="brand-dashboard" element={
   <ProtectedRoute>
     <BrandDashboard />

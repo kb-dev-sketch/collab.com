@@ -199,23 +199,27 @@ function Sidebar() {
 
           {/* Profile */}
 
-          <li>
-            <Link
-              to="/brand-profile-view"
-              className="group flex items-center gap-3 rounded-xl px-4 py-3 text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
-            >
-              <FiUser size={20} />
+         <li>
+  <Link
+    to={
+      user?.role === "creator"
+        ? "/creator-profile-view"
+        : "/brand-profile-view"
+    }
+    className="group flex items-center gap-3 rounded-xl px-4 py-3 text-slate-600 transition hover:bg-slate-50 hover:text-blue-600"
+  >
+    <FiUser size={20} />
 
-              <span className="flex-1">
-                Profile
-              </span>
+    <span className="flex-1">
+      Profile
+    </span>
 
-              <FiChevronRight
-                size={16}
-                className="opacity-0 transition group-hover:opacity-100"
-              />
-            </Link>
-          </li>
+    <FiChevronRight
+      size={16}
+      className="opacity-0 transition group-hover:opacity-100"
+    />
+  </Link>
+</li>
 
           {/* Settings */}
 

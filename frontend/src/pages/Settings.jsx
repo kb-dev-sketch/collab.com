@@ -11,11 +11,15 @@ import {
   FiBriefcase,
   FiChevronRight,
   FiHelpCircle,
+  FiEye,
+  FiEyeOff,
+  FiCheckCircle,
+  FiAlertCircle,
 } from "react-icons/fi";
 
 import { AuthContext } from "../context/AuthContext";
 import Sidebar from "../components/Sidebar";
-
+import { ChangePassword } from "../services/auth";
 function Settings() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -55,7 +59,62 @@ function Settings() {
       icon: FiBell,
     },
   ];
+const [currentPassword, setCurrentPassword] = useState("");
+const [newPassword, setNewPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
 
+const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+const [showNewPassword, setShowNewPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+const [passwordLoading, setPasswordLoading] = useState(false);
+const [passwordError, setPasswordError] = useState("");
+const [passwordSuccess, setPasswordSuccess] = useState("");
+const handleChangePassword = async (e) => {
+  e.preventDefault();
+
+  setPasswordError("");
+  setPasswordSuccess("");
+
+  if (!currentPassword || !newPassword || !confirmPassword) {
+    setPasswordError("Please fill all password fields.");
+    return;
+  }
+
+  if (newPassword.length < 6) {
+    setPasswordError("New password must be at least 6 characters.");
+    return;
+  }
+
+  if (newPassword !== confirmPassword) {
+    setPasswordError("New password and confirm password do not match.");
+    return;
+  }
+
+  try {
+    setPasswordLoading(true);
+
+    await ChangePassword({
+      currentPassword,
+      newPassword,
+    });
+
+    setPasswordSuccess("Password changed successfully.");
+
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+  } catch (error) {
+    console.error("Change password error:", error);
+
+    setPasswordError(
+      error.response?.data?.message ||
+        "Failed to change password. Please try again."
+    );
+  } finally {
+    setPasswordLoading(false);
+  }
+};
   return (
     <div className="flex min-h-screen bg-slate-50">
 
@@ -335,67 +394,184 @@ function Settings() {
               )}
 
               {/* ================= SECURITY ================= */}
-              {activeTab === "security" && (
-                <div className="space-y-6">
-                  <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                    <div className="border-b border-slate-100 px-6 py-6 sm:px-8">
-                      <h2 className="text-xl font-bold text-slate-900">
-                        Security
-                      </h2>
+           {activeTab === "security" && (
+  <div className="space-y-6">
+    {/* Security Header */}
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="border-b border-slate-100 px-6 py-6 sm:px-8">
+        <div className="flex items-center gap-4">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+            <FiShield size={20} />
+          </div>
 
-                      <p className="mt-1 text-sm text-slate-500">
-                        Manage your account security.
-                      </p>
-                    </div>
+          <div>
+            <h2 className="text-xl font-bold text-slate-900">
+              Security
+            </h2>
 
-                    <div className="p-6 sm:p-8">
-                      <div className="flex flex-col gap-5 rounded-xl border border-slate-200 p-5 sm:flex-row sm:items-center">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                          <FiLock size={20} />
-                        </div>
+            <p className="mt-1 text-sm text-slate-500">
+              Manage your password and keep your account secure.
+            </p>
+          </div>
+        </div>
+      </div>
 
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-slate-900">
-                            Password
-                          </h3>
+      {/* Change Password */}
+      <form
+        onSubmit={handleChangePassword}
+        className="space-y-6 p-6 sm:p-8"
+      >
+        {/* Current Password */}
+        <div>
+          <label className="mb-2 block text-sm font-medium text-slate-700">
+            Current password
+          </label>
 
-                          <p className="mt-1 text-sm text-slate-500">
-                            Change your password to keep your account secure.
-                          </p>
-                        </div>
+          <div className="relative">
+            <input
+              type={showCurrentPassword ? "text" : "password"}
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              placeholder="Enter your current password"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 pr-12 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+            />
 
-                        <button
-                          type="button"
-                          className="rounded-xl border border-blue-200 px-4 py-2.5 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"
-                        >
-                          Change Password
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-amber-100 bg-amber-50 p-6">
-                    <div className="flex gap-4">
-                      <FiShield
-                        size={20}
-                        className="mt-0.5 shrink-0 text-amber-600"
-                      />
-
-                      <div>
-                        <h3 className="font-semibold text-amber-900">
-                          Keep your account secure
-                        </h3>
-
-                        <p className="mt-1 text-sm leading-6 text-amber-700">
-                          Never share your password or authentication
-                          credentials with anyone.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <button
+              type="button"
+              onClick={() =>
+                setShowCurrentPassword((prev) => !prev)
+              }
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-blue-600"
+            >
+              {showCurrentPassword ? (
+                <FiEyeOff size={18} />
+              ) : (
+                <FiEye size={18} />
               )}
+            </button>
+          </div>
+        </div>
 
+        {/* New Password */}
+        <div>
+          <label className="mb-2 block text-sm font-medium text-slate-700">
+            New password
+          </label>
+
+          <div className="relative">
+            <input
+              type={showNewPassword ? "text" : "password"}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Enter your new password"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 pr-12 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+            />
+
+            <button
+              type="button"
+              onClick={() =>
+                setShowNewPassword((prev) => !prev)
+              }
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-blue-600"
+            >
+              {showNewPassword ? (
+                <FiEyeOff size={18} />
+              ) : (
+                <FiEye size={18} />
+              )}
+            </button>
+          </div>
+
+          <p className="mt-2 text-xs text-slate-400">
+            Use at least 6 characters.
+          </p>
+        </div>
+
+        {/* Confirm Password */}
+        <div>
+          <label className="mb-2 block text-sm font-medium text-slate-700">
+            Confirm new password
+          </label>
+
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Re-enter your new password"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 pr-12 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+            />
+
+            <button
+              type="button"
+              onClick={() =>
+                setShowConfirmPassword((prev) => !prev)
+              }
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-blue-600"
+            >
+              {showConfirmPassword ? (
+                <FiEyeOff size={18} />
+              ) : (
+                <FiEye size={18} />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Error */}
+        {passwordError && (
+          <div className="flex items-center gap-3 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-600">
+            <FiAlertCircle size={18} />
+            <span>{passwordError}</span>
+          </div>
+        )}
+
+        {/* Success */}
+        {passwordSuccess && (
+          <div className="flex items-center gap-3 rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm text-emerald-600">
+            <FiCheckCircle size={18} />
+            <span>{passwordSuccess}</span>
+          </div>
+        )}
+
+        {/* Button */}
+        <div className="flex justify-end border-t border-slate-100 pt-6">
+          <button
+            type="submit"
+            disabled={passwordLoading}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <FiLock size={17} />
+
+            {passwordLoading
+              ? "Updating..."
+              : "Change Password"}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {/* Security Tips */}
+    <div className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
+      <div className="flex gap-4">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blue-600 shadow-sm">
+          <FiShield size={19} />
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-slate-900">
+            Security tips
+          </h3>
+
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Use a strong password that you do not reuse on other
+            websites. Never share your password with anyone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
               {/* ================= NOTIFICATIONS ================= */}
               {activeTab === "notifications" && (
                 <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
