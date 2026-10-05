@@ -70,7 +70,7 @@ function CampaignDetails() {
       <div className="flex min-h-screen bg-slate-50">
         <Sidebar />
 
-        <main className="flex-1 p-5 sm:p-6 lg:p-10">
+        <main className="min-w-0 flex-1 pt-16 lg:pt-0 p-4 sm:p-6 lg:p-10">
           <div className="mx-auto max-w-4xl">
 
             <button
@@ -119,7 +119,7 @@ function CampaignDetails() {
       <div className="flex min-h-screen bg-slate-50">
         <Sidebar />
 
-        <main className="flex-1 p-5 sm:p-6 lg:p-10">
+        <main className="min-w-0 flex-1 pt-16 lg:pt-0 p-4 sm:p-6 lg:p-10">
           <div className="mx-auto max-w-4xl">
 
             <button
@@ -176,9 +176,9 @@ function CampaignDetails() {
       <Sidebar />
 
       {/* ================= MAIN ================= */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto pt-16 lg:pt-0">
 
-        <div className="mx-auto max-w-7xl p-5 sm:p-6 lg:p-10">
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:p-10 ">
 
           {/* ================= BACK ================= */}
 
@@ -212,7 +212,7 @@ function CampaignDetails() {
                     Campaign Details
                   </div>
 
-                  <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                  <h1 className="text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl break-words">
                     {campaign.title}
                   </h1>
 
@@ -517,7 +517,7 @@ function CampaignDetails() {
                     navigate(`/campaign/${campaign._id}/proposal`)
                   }
                   disabled={campaign.status !== "Active"}
-                  className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold text-white shadow-lg transition ${
+                  className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold text-white shadow-lg transition sm:w-fit ${
                     campaign.status === "Active"
                       ? "bg-blue-600 shadow-blue-600/20 hover:bg-blue-700"
                       : "cursor-not-allowed bg-slate-300 shadow-none"
@@ -557,7 +557,7 @@ function CampaignDetails() {
                     onClick={() =>
                       navigate(`/campaign/${campaign._id}/proposals`)
                     }
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700"
+                    className="inline-flex w-fullitems-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 sm:w-fit"
                   >
                     <FiUsers size={17} />
                     View Proposals
@@ -567,7 +567,7 @@ function CampaignDetails() {
                     onClick={() =>
                       navigate(`/campaign/${campaign._id}/edit`)
                     }
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-6 py-3 font-semibold text-blue-700 transition hover:bg-blue-100"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-6 py-3 font-semibold text-blue-700 transition hover:bg-blue-100 sm:w-fit"
                   >
                     <FiEdit3 size={17} />
                     Edit Campaign
