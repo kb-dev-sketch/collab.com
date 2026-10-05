@@ -35,26 +35,25 @@ function CreatorDashboard() {
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Sidebar */}
+      {/* ================= SIDEBAR ================= */}
       <Sidebar />
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-7xl p-6 lg:p-10">
+      {/* ================= MAIN CONTENT ================= */}
+      <main className="min-w-0 flex-1 overflow-y-auto pt-16 lg:pt-0">
+        <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-10">
 
           {/* ================= HEADER ================= */}
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-
-            <div>
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div className="min-w-0">
               <p className="text-sm font-semibold text-blue-600">
                 Creator Dashboard
               </p>
 
-              <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900 lg:text-4xl">
+              <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
                 Hello, {user?.username} 👋
               </h1>
 
-              <p className="mt-2 text-slate-500">
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
                 Discover campaigns, manage proposals, and grow your
                 collaborations.
               </p>
@@ -62,8 +61,9 @@ function CreatorDashboard() {
 
             {/* Explore Campaigns */}
             <button
+              type="button"
               onClick={() => navigate("/campaigns")}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 hover:shadow-xl"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 hover:shadow-xl sm:w-fit sm:text-base"
             >
               <FiSearch size={19} />
               Explore Campaigns
@@ -71,63 +71,57 @@ function CreatorDashboard() {
           </div>
 
           {/* ================= PROFILE BANNER ================= */}
-          <div className="relative mt-8 overflow-hidden rounded-2xl bg-blue-600 p-6 text-white shadow-lg shadow-blue-600/20 lg:p-8">
-
+          <div className="relative mt-6 overflow-hidden rounded-2xl bg-blue-600 p-5 text-white shadow-lg shadow-blue-600/20 sm:mt-8 sm:p-6 lg:p-8">
             {/* Decorative circles */}
-            <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10"></div>
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 sm:h-40 sm:w-40" />
 
-            <div className="absolute -bottom-16 right-32 h-48 w-48 rounded-full bg-white/5"></div>
+            <div className="absolute -bottom-16 right-10 h-40 w-40 rounded-full bg-white/5 sm:right-32 sm:h-48 sm:w-48" />
 
             <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-
-              <div>
+              <div className="max-w-2xl">
                 <p className="text-sm font-medium text-blue-100">
                   Grow your creator profile
                 </p>
 
-                <h2 className="mt-1 text-2xl font-bold">
+                <h2 className="mt-1 text-xl font-bold sm:text-2xl">
                   Make your profile stand out
                 </h2>
 
-                <p className="mt-2 max-w-xl text-sm leading-6 text-blue-100">
+                <p className="mt-2 text-sm leading-6 text-blue-100">
                   Keep your profile, niches, social links and portfolio
                   updated so brands can discover you more easily.
                 </p>
               </div>
 
               <button
+                type="button"
                 onClick={() => navigate("/creator-profile")}
-                className="inline-flex w-fit items-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-blue-600 shadow-sm transition hover:bg-blue-50"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 shadow-sm transition hover:bg-blue-50 sm:w-fit"
               >
                 <FiUser size={18} />
                 Edit Profile
               </button>
-
             </div>
           </div>
 
           {/* ================= STATS ================= */}
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4">
             {/* Active Proposals */}
-            <div className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-
-              <div className="flex items-start justify-between">
-
-                <div>
+            <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-slate-500">
                     Active Proposals
                   </p>
 
-                  <h2 className="mt-3 text-3xl font-bold text-slate-900">
+                  <h2 className="mt-2 text-3xl font-bold text-slate-900">
                     12
                   </h2>
                 </div>
 
-                <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
+                <div className="shrink-0 rounded-xl bg-blue-50 p-3 text-blue-600">
                   <FiFileText size={22} />
                 </div>
-
               </div>
 
               <p className="mt-4 text-sm text-slate-400">
@@ -136,24 +130,21 @@ function CreatorDashboard() {
             </div>
 
             {/* Ongoing Campaigns */}
-            <div className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-
-              <div className="flex items-start justify-between">
-
-                <div>
+            <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-slate-500">
                     Ongoing Campaigns
                   </p>
 
-                  <h2 className="mt-3 text-3xl font-bold text-slate-900">
+                  <h2 className="mt-2 text-3xl font-bold text-slate-900">
                     5
                   </h2>
                 </div>
 
-                <div className="rounded-xl bg-indigo-50 p-3 text-indigo-600">
+                <div className="shrink-0 rounded-xl bg-indigo-50 p-3 text-indigo-600">
                   <FiBriefcase size={22} />
                 </div>
-
               </div>
 
               <p className="mt-4 text-sm text-slate-400">
@@ -161,25 +152,22 @@ function CreatorDashboard() {
               </p>
             </div>
 
-            {/* Completed */}
-            <div className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-
-              <div className="flex items-start justify-between">
-
-                <div>
+            {/* Completed Campaigns */}
+            <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-slate-500">
                     Completed Campaigns
                   </p>
 
-                  <h2 className="mt-3 text-3xl font-bold text-slate-900">
+                  <h2 className="mt-2 text-3xl font-bold text-slate-900">
                     3
                   </h2>
                 </div>
 
-                <div className="rounded-xl bg-emerald-50 p-3 text-emerald-600">
+                <div className="shrink-0 rounded-xl bg-emerald-50 p-3 text-emerald-600">
                   <FiCheckCircle size={22} />
                 </div>
-
               </div>
 
               <p className="mt-4 text-sm text-slate-400">
@@ -188,24 +176,21 @@ function CreatorDashboard() {
             </div>
 
             {/* Earnings */}
-            <div className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-
-              <div className="flex items-start justify-between">
-
-                <div>
+            <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-slate-500">
                     Total Earnings
                   </p>
 
-                  <h2 className="mt-3 text-3xl font-bold text-slate-900">
+                  <h2 className="mt-2 text-3xl font-bold text-slate-900">
                     ₹45,000
                   </h2>
                 </div>
 
-                <div className="rounded-xl bg-sky-50 p-3 text-sky-600">
+                <div className="shrink-0 rounded-xl bg-sky-50 p-3 text-sky-600">
                   <FiDollarSign size={22} />
                 </div>
-
               </div>
 
               <p className="mt-4 text-sm text-slate-400">
@@ -215,8 +200,7 @@ function CreatorDashboard() {
           </div>
 
           {/* ================= QUICK ACTIONS ================= */}
-          <div className="mt-10">
-
+          <div className="mt-8 sm:mt-10">
             <div className="mb-5">
               <h2 className="text-xl font-bold text-slate-900">
                 Quick Actions
@@ -227,20 +211,19 @@ function CreatorDashboard() {
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
-
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
               {/* Explore Campaigns */}
               <button
+                type="button"
                 onClick={() => navigate("/campaigns")}
-                className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
+                className="group flex min-w-0 items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
               >
-                <div className="flex items-center gap-4">
-
-                  <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
+                <div className="flex min-w-0 items-center gap-4">
+                  <div className="shrink-0 rounded-xl bg-blue-50 p-3 text-blue-600">
                     <FiSearch size={21} />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="font-semibold text-slate-900">
                       Explore Campaigns
                     </h3>
@@ -249,27 +232,26 @@ function CreatorDashboard() {
                       Find brands hiring creators
                     </p>
                   </div>
-
                 </div>
 
                 <FiArrowRight
                   size={20}
-                  className="text-slate-400 transition group-hover:translate-x-1 group-hover:text-blue-600"
+                  className="shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-blue-600"
                 />
               </button>
 
               {/* My Proposals */}
               <button
+                type="button"
                 onClick={() => navigate("/creator-proposals")}
-                className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
+                className="group flex min-w-0 items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
               >
-                <div className="flex items-center gap-4">
-
-                  <div className="rounded-xl bg-indigo-50 p-3 text-indigo-600">
+                <div className="flex min-w-0 items-center gap-4">
+                  <div className="shrink-0 rounded-xl bg-indigo-50 p-3 text-indigo-600">
                     <FiFileText size={21} />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="font-semibold text-slate-900">
                       My Proposals
                     </h3>
@@ -278,27 +260,26 @@ function CreatorDashboard() {
                       Track your submitted proposals
                     </p>
                   </div>
-
                 </div>
 
                 <FiArrowRight
                   size={20}
-                  className="text-slate-400 transition group-hover:translate-x-1 group-hover:text-blue-600"
+                  className="shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-blue-600"
                 />
               </button>
 
               {/* Messages */}
               <button
+                type="button"
                 onClick={() => navigate("/messages")}
-                className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
+                className="group flex min-w-0 items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
               >
-                <div className="flex items-center gap-4">
-
-                  <div className="rounded-xl bg-sky-50 p-3 text-sky-600">
+                <div className="flex min-w-0 items-center gap-4">
+                  <div className="shrink-0 rounded-xl bg-sky-50 p-3 text-sky-600">
                     <FiMessageSquare size={21} />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="font-semibold text-slate-900">
                       Messages
                     </h3>
@@ -307,24 +288,20 @@ function CreatorDashboard() {
                       Chat with brands
                     </p>
                   </div>
-
                 </div>
 
                 <FiArrowRight
                   size={20}
-                  className="text-slate-400 transition group-hover:translate-x-1 group-hover:text-blue-600"
+                  className="shrink-0 text-slate-400 transition group-hover:translate-x-1 group-hover:text-blue-600"
                 />
               </button>
-
             </div>
           </div>
 
           {/* ================= RECOMMENDED CAMPAIGNS ================= */}
-          <div className="mt-10">
-
-            <div className="mb-5 flex items-center justify-between">
-
-              <div>
+          <div className="mt-8 sm:mt-10">
+            <div className="mb-5 flex items-start justify-between gap-4">
+              <div className="min-w-0">
                 <h2 className="text-xl font-bold text-slate-900">
                   Recommended Campaigns
                 </h2>
@@ -335,42 +312,37 @@ function CreatorDashboard() {
               </div>
 
               <button
+                type="button"
                 onClick={() => navigate("/campaigns")}
-                className="hidden items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 sm:flex"
+                className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 sm:flex"
               >
                 View all
                 <FiArrowRight size={16} />
               </button>
-
             </div>
 
             {/* Campaign Card */}
-            <div className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-
+            <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-6">
               <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-
-                <div className="flex-1">
-
+                <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-3">
-
-                    <h3 className="text-xl font-bold text-slate-900">
+                    <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
                       TechGear Summer Blast
                     </h3>
 
                     <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
                       Active
                     </span>
-
                   </div>
 
-                  <p className="mt-2 text-sm leading-6 text-slate-500">
+                  <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">
                     Create engaging technology content for TechGear's
-                    summer product campaign and reach a tech-savvy audience.
+                    summer product campaign and reach a tech-savvy
+                    audience.
                   </p>
 
                   {/* Campaign Information */}
-                  <div className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
-
+                  <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
                     <div>
                       <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                         Budget
@@ -400,60 +372,63 @@ function CreatorDashboard() {
                         Instagram
                       </p>
                     </div>
-
                   </div>
-
                 </div>
 
                 <button
-                  onClick={() => navigate("/campaign/REPLACE_WITH_ID")}
-                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-md shadow-blue-600/20 transition hover:bg-blue-700"
+                  type="button"
+                  onClick={() =>
+                    navigate("/campaign/REPLACE_WITH_ID")
+                  }
+                  className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition hover:bg-blue-700 md:w-fit"
                 >
                   View Details
                   <FiArrowRight size={18} />
                 </button>
-
               </div>
-
             </div>
+
+            {/* Mobile View All */}
+            <button
+              type="button"
+              onClick={() => navigate("/campaigns")}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-600 sm:hidden"
+            >
+              View all campaigns
+              <FiArrowRight size={16} />
+            </button>
           </div>
 
           {/* ================= BOTTOM CTA ================= */}
-          <div className="mt-10 overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 shadow-sm lg:p-8">
-
+          <div className="mt-8 overflow-hidden rounded-2xl border border-blue-100 bg-white p-5 shadow-sm sm:mt-10 sm:p-6 lg:p-8">
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-
-              <div className="flex items-start gap-4">
-
-                <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
+              <div className="flex min-w-0 items-start gap-4">
+                <div className="shrink-0 rounded-xl bg-blue-50 p-3 text-blue-600">
                   <FiBriefcase size={22} />
                 </div>
 
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-bold text-slate-900">
                     Looking for your next collaboration?
                   </h3>
 
-                  <p className="mt-1 text-sm text-slate-500">
-                    Explore active campaigns and find opportunities that
-                    match your niche.
+                  <p className="mt-1 text-sm leading-6 text-slate-500">
+                    Explore active campaigns and find opportunities
+                    that match your niche.
                   </p>
                 </div>
-
               </div>
 
               <button
+                type="button"
                 onClick={() => navigate("/campaigns")}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 font-semibold text-blue-600 transition hover:bg-blue-100"
+                className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-100 md:w-fit"
               >
                 Browse Campaigns
                 <FiArrowRight size={17} />
               </button>
-
             </div>
-
           </div>
-
         </div>
       </main>
     </div>

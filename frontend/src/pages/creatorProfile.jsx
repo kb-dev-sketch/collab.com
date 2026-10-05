@@ -162,13 +162,10 @@ function CreatorProfile() {
       <Sidebar />
 
       {/* ================= MAIN ================= */}
-      <main className="flex-1 overflow-y-auto">
-
-        <div className="mx-auto max-w-6xl p-5 sm:p-6 lg:p-10">
-
+     <main className="min-w-0 flex-1 overflow-y-auto pt-16 lg:pt-0">
+  <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-6 lg:p-10">
           {/* ================= HERO ================= */}
-          <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-6 text-white shadow-xl shadow-blue-600/20 sm:p-8 lg:p-10">
-
+<section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-5 text-white shadow-xl shadow-blue-600/20 sm:p-8 lg:p-10">
             <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-white/10 blur-2xl" />
 
             <div className="absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-blue-300/10 blur-3xl" />
@@ -181,8 +178,7 @@ function CreatorProfile() {
                   <FiUser size={14} />
                   Creator Profile
                 </div>
-
-                <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+<h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
                   Build your creator profile
                 </h1>
 
@@ -229,8 +225,7 @@ function CreatorProfile() {
           >
 
             {/* ================= BASIC INFO ================= */}
-            <section className="rounded-3xl border border-blue-100 bg-white p-6 shadow-sm sm:p-8">
-
+<section className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm sm:rounded-3xl sm:p-8">
               <FormSectionHeader
                 icon={<FiUser size={18} />}
                 title="Basic Information"
@@ -287,8 +282,7 @@ function CreatorProfile() {
 
               {/* Profile Preview */}
               {formData.profileImage && (
-                <div className="mt-6 flex items-center gap-4 rounded-2xl border border-blue-100 bg-blue-50/50 p-4">
-
+                <div className="mt-6 flex flex-col gap-4 rounded-2xl border border-blue-100 bg-blue-50/50 p-4 sm:flex-row sm:items-center">
                   <img
                     src={formData.profileImage}
                     alt="Profile Preview"
@@ -640,11 +634,11 @@ function CreatorProfile() {
 
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-blue-700 shadow-md transition hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-60"
-                >
+             <button
+  type="submit"
+  disabled={loading}
+  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-blue-700 shadow-md transition hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-60 md:w-fit"
+>
                   {loading ? (
                     <>
                       <span className="h-4 w-4 animate-spin rounded-full border-2 border-blue-200 border-t-blue-700" />

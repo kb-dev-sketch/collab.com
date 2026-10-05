@@ -120,9 +120,8 @@ function CreatorProfileView() {
   return (
     <div className="flex min-h-screen bg-slate-50">
       <Sidebar />
-
-      <main className="min-w-0 flex-1">
-        <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 lg:px-10">
+<main className="min-w-0 flex-1 pt-16 lg:pt-0">
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
 
           {/* =====================================================
               PROFILE HERO
@@ -130,7 +129,7 @@ function CreatorProfileView() {
           <section className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
 
             {/* Blue Banner */}
-            <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 px-6 py-7 sm:px-8 sm:py-8">
+            <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 px-4 py-6 sm:px-8 sm:py-8">
 
               {/* Decorative circles */}
               <div className="absolute -right-10 -top-16 h-44 w-44 rounded-full bg-white/10" />
@@ -201,7 +200,7 @@ function CreatorProfileView() {
                 {/* Edit button */}
                 <Link
                   to="/creator-profile"
-                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 shadow-lg transition hover:bg-blue-50"
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 shadow-lg transition hover:bg-blue-50 sm:w-fit"
                 >
                   <FiEdit3 size={16} />
                   Edit Profile

@@ -13,7 +13,6 @@ import {
   FiSearch,
   FiBriefcase,
   FiRefreshCw,
-  FiArrowRight,
 } from "react-icons/fi";
 
 function Campaigns() {
@@ -65,9 +64,8 @@ function Campaigns() {
       <Sidebar />
 
       {/* Main */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-7xl p-5 sm:p-6 lg:p-10">
-
+      <main className="min-w-0 flex-1 overflow-y-auto pt-16 lg:pt-0">
+<div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:p-10">
           {/* ================= HEADER ================= */}
           <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 p-6 text-white shadow-xl shadow-blue-600/20 sm:p-8 lg:p-10">
 
@@ -133,8 +131,8 @@ function Campaigns() {
               {isBrand && (
                 <button
                   onClick={() => navigate("/CreateCampaign")}
-                  className="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-blue-700 shadow-lg transition-all hover:-translate-y-0.5 hover:bg-blue-50"
-                >
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-blue-700 shadow-lg transition-all hover:-translate-y-0.5 hover:bg-blue-50 sm:w-fit">
+                
                   <FiPlus size={18} />
                   Create Campaign
                 </button>
