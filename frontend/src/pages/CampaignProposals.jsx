@@ -156,9 +156,9 @@ function CampaignProposals() {
       <Sidebar />
 
       {/* ================= MAIN ================= */}
-      <main className="flex-1 overflow-y-auto">
+     <main className="min-w-0 flex-1 overflow-y-auto pt-16 lg:pt-0">
 
-        <div className="mx-auto max-w-7xl p-5 sm:p-6 lg:p-10">
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:p-10">
 
           {/* ================= HERO ================= */}
           <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-6 text-white shadow-xl shadow-blue-600/20 sm:p-8 lg:p-10">
@@ -187,7 +187,7 @@ function CampaignProposals() {
                     Creator Applications
                   </div>
 
-                  <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
                     Campaign Proposals
                   </h1>
 
@@ -199,9 +199,9 @@ function CampaignProposals() {
                 </div>
 
                 {/* Mini Stats */}
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 gap-3 min-[400px]:grid-cols-3">
 
-                  <div className="min-w-[90px] rounded-2xl border border-white/15 bg-white/10 p-4 text-center backdrop-blur-md">
+                  <div className=" rounded-2xl border border-white/15 bg-white/10 p-4 text-center backdrop-blur-md">
                     <p className="text-xs text-blue-100">
                       Total
                     </p>
@@ -211,7 +211,7 @@ function CampaignProposals() {
                     </p>
                   </div>
 
-                  <div className="min-w-[90px] rounded-2xl border border-white/15 bg-white/10 p-4 text-center backdrop-blur-md">
+                  <div className=" rounded-2xl border border-white/15 bg-white/10 p-4 text-center backdrop-blur-md">
                     <p className="text-xs text-blue-100">
                       Pending
                     </p>
@@ -221,7 +221,7 @@ function CampaignProposals() {
                     </p>
                   </div>
 
-                  <div className="min-w-[90px] rounded-2xl border border-white/15 bg-white/10 p-4 text-center backdrop-blur-md">
+                  <div className="rounded-2xl border border-white/15 bg-white/10 p-4 text-center backdrop-blur-md">
                     <p className="text-xs text-blue-100">
                       Accepted
                     </p>
@@ -414,8 +414,7 @@ function CampaignProposals() {
                         {/* ================= CREATOR HEADER ================= */}
                         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
 
-                          <div className="flex items-start gap-4">
-
+                         <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                             {/* Avatar */}
                             <div className="relative">
 
@@ -444,7 +443,7 @@ function CampaignProposals() {
 
                               <div className="flex flex-wrap items-center gap-2">
 
-                                <h3 className="text-xl font-bold text-slate-900">
+                              <h3 className="break-words text-lg font-bold text-slate-900 sm:text-xl">
                                   {creator?.name || "Influencer"}
                                 </h3>
 
@@ -716,7 +715,7 @@ function CampaignProposals() {
       type="button"
       onClick={() => handleReject(proposal._id)}
       disabled={actionLoading === proposal._id}
-      className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-6 py-3 font-semibold text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+      className="w-full sm:w-fit inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-6 py-3 font-semibold text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <FiX size={17} />
 
@@ -730,7 +729,7 @@ function CampaignProposals() {
       type="button"
       onClick={() => handleAccept(proposal._id)}
       disabled={actionLoading === proposal._id}
-      className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+      className="w-full sm:w-fit inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <FiCheck size={17} />
 
