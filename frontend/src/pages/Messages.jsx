@@ -126,12 +126,12 @@ function Messages() {
       <Sidebar />
 
       {/* ================= MESSAGES ================= */}
-      <main className="flex-1 p-5 sm:p-6 lg:p-8">
+      <main className="min-w-0 flex-1 px-3 pb-3 pt-20 sm:p-6 lg:p-8">
         <div className="mx-auto flex h-[calc(100vh-64px)] max-w-7xl overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-xl shadow-blue-100/20">
 
           {/* ================= CHAT LIST ================= */}
           <aside
-            className={`w-full border-r border-slate-200 md:w-[340px] ${
+            className={`flex w-full min-w-0 flex-col border-r border-slate-200 md:w-[340px] ${
               selectedChat ? "hidden md:block" : "block"
             }`}
           >
@@ -171,7 +171,7 @@ function Messages() {
             </div>
 
             {/* Chat List */}
-            <div className="h-[calc(100%-145px)] overflow-y-auto">
+            <div className="min-h-0 flex-1 overflow-y-auto">
               {filteredChats.length === 0 ? (
                 <div className="px-5 py-12 text-center">
                   <FiMessageSquare
@@ -263,7 +263,7 @@ function Messages() {
             ) : (
               <>
                 {/* Chat Header */}
-                <div className="flex items-center gap-3 border-b border-slate-200 px-5 py-4">
+                <div className="flex min-w-0 items-center gap-3 border-b border-slate-200 px-3 py-3 sm:px-5 sm:py-4">
                   <button
                     type="button"
                     onClick={() => setSelectedChat(null)}
@@ -295,7 +295,7 @@ function Messages() {
                 </div>
 
                 {/* Messages */}
-                <div className="flex-1 space-y-4 overflow-y-auto bg-slate-50/60 p-5">
+                <div className="min-h-0 flex-1 space-y-3 overflow-y-auto bg-slate-50/60 p-3 sm:space-y-4 sm:p-5">
                   {messagesLoading ? (
                     <div className="flex h-full items-center justify-center">
                       <p className="text-sm text-slate-400">
@@ -315,7 +315,7 @@ function Messages() {
                           key={message._id}
                           className="flex justify-end"
                         >
-                          <div className="max-w-[75%] rounded-2xl rounded-br-md bg-blue-600 px-4 py-3 text-white shadow-sm">
+                          <div className="max-w-[88%] break-words rounded-2xl rounded-br-md bg-blue-600 px-4 py-3 text-white shadow-sm sm:max-w-[75%]">
                             <p className="text-sm leading-6">
                               {message.text}
                             </p>
@@ -338,10 +338,10 @@ function Messages() {
                 </div>
 
                 {/* Input */}
-                <form
-                  onSubmit={handleSendMessage}
-                  className="flex items-center gap-3 border-t border-slate-200 bg-white p-4"
-                >
+              <form
+  onSubmit={handleSendMessage}
+  className="flex items-center gap-2 border-t border-slate-200 bg-white p-3 sm:gap-3 sm:p-4"
+>
                   <input
                     type="text"
                     value={messageText}
@@ -349,7 +349,7 @@ function Messages() {
                       setMessageText(e.target.value)
                     }
                     placeholder="Type a message..."
-                    className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-blue-400 focus:bg-white"
+                    className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm outline-none transition focus:border-blue-400 focus:bg-white sm:px-4"
                   />
 
                   <button
