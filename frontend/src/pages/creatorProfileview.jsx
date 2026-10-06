@@ -120,8 +120,7 @@ function CreatorProfileView() {
   return (
     <div className="flex min-h-screen bg-slate-50">
       <Sidebar />
-<main className="min-w-0 flex-1 pt-16 lg:pt-0">
-        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
+<main className="flex min-w-0 flex-1 items-center justify-center px-4 pb-6 pt-20 sm:p-6 lg:pt-6">        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
 
           {/* =====================================================
               PROFILE HERO
@@ -135,11 +134,9 @@ function CreatorProfileView() {
               <div className="absolute -right-10 -top-16 h-44 w-44 rounded-full bg-white/10" />
               <div className="absolute right-32 -bottom-24 h-48 w-48 rounded-full bg-white/10" />
 
-              <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-
+             <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                 {/* Creator information */}
-                <div className="flex items-center gap-5">
-
+            <div className="flex min-w-0 flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:gap-5 sm:text-left">
                   {/* Profile image */}
                   {profile.profileImage ? (
                     <img
@@ -200,7 +197,7 @@ function CreatorProfileView() {
                 {/* Edit button */}
                 <Link
                   to="/creator-profile"
-                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 shadow-lg transition hover:bg-blue-50 sm:w-fit"
+                  className="inline-flex w-full  shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 shadow-lg transition hover:bg-blue-50 sm:w-fit"
                 >
                   <FiEdit3 size={16} />
                   Edit Profile
@@ -209,7 +206,7 @@ function CreatorProfileView() {
             </div>
 
             {/* Bio */}
-            <div className="px-6 py-6 sm:px-8">
+            <div className="px-6 py-6 sm:px-8 sm:py-6">
               <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
                 About Creator
               </p>
@@ -590,7 +587,7 @@ function CreatorProfileView() {
 
               <Link
                 to="/creator-profile"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"
+                className="inline-flex shrink-0  w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"
               >
                 <FiEdit3 size={16} />
                 Edit Profile
@@ -609,12 +606,12 @@ function CreatorProfileView() {
 
 function StatCard({ icon, value, label }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-5">
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
         {icon}
       </div>
 
-      <p className="mt-5 text-2xl font-bold text-slate-900">
+<p className="mt-4 text-xl font-bold text-slate-900 sm:mt-5 sm:text-2xl">
         {value}
       </p>
 
