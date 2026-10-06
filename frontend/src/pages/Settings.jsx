@@ -122,15 +122,15 @@ const handleChangePassword = async (e) => {
       <Sidebar />
 
       {/* Page */}
-      <main className="min-w-0 flex-1">
+      <main className="min-w-0 flex-1 pt-16 lg:pt-0">
         {/* Header */}
         <header className="border-b border-slate-200 bg-white">
-          <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
+          <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8 sm:py-8">
             <p className="text-sm font-semibold text-blue-600">
               Account Settings
             </p>
 
-            <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
+<h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
               Settings
             </h1>
 
@@ -142,7 +142,7 @@ const handleChangePassword = async (e) => {
         </header>
 
         {/* Content */}
-        <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-5 sm:px-8 sm:py-8">
           <div className="grid gap-6 lg:grid-cols-[230px_minmax(0,1fr)]">
             {/* Settings Navigation */}
             <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
@@ -151,8 +151,7 @@ const handleChangePassword = async (e) => {
                   Preferences
                 </p>
               </div>
-
-              <div className="space-y-1">
+              <div className="grid grid-cols-2 gap-1 lg:block lg:space-y-1">
                 {tabs.map((tab) => {
                   const Icon = tab.icon;
                   const active = activeTab === tab.id;
@@ -162,8 +161,7 @@ const handleChangePassword = async (e) => {
                       key={tab.id}
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
-                      className={`group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition ${
-                        active
+className={`group flex min-w-0 w-full items-center gap-2 rounded-xl px-3 py-3 text-sm font-medium transition lg:gap-3 ${                        active
                           ? "bg-blue-50 text-blue-600"
                           : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                       }`}
@@ -335,8 +333,7 @@ const handleChangePassword = async (e) => {
                       <button
                         type="button"
                         onClick={() => setActiveTab("profile")}
-                        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700"
-                      >
+                         className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 sm:w-fit">
                         <FiEdit3 size={16} />
                         Edit Profile
                       </button>
@@ -382,8 +379,7 @@ const handleChangePassword = async (e) => {
                               ? "/creator-profile"
                               : "/brand-profile"
                           }
-                          className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-                        >
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 sm:w-fit"                        >
                           Open Profile
                           <FiChevronRight size={16} />
                         </Link>
