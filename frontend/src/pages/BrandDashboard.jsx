@@ -86,20 +86,22 @@ function BrandDashboard() {
       <Sidebar />
 
       {/* ================= MAIN ================= */}
-      <main className="flex-1 overflow-y-auto">
-
-        <div className="mx-auto max-w-7xl p-5 sm:p-6 lg:p-10">
-
+<main className="min-w-0 flex-1 overflow-y-auto pt-16 lg:pt-0">
+<div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:p-10">
           {/* ================= HEADER ================= */}
           <section className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
 
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
+              <div className="mb-2 inline-flex
+               items-center gap-2 
+               rounded-full bg-blue-50 
+               px-3 py-1 text-xs font-semibold 
+               text-blue-600">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
                 Brand Dashboard
               </div>
 
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
                 Welcome, {user?.username} 👋
               </h1>
 
@@ -111,7 +113,14 @@ function BrandDashboard() {
 
             <button
               onClick={() => navigate("/create-campaign")}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
+              className="inline-flex w-full 
+              items-center justify-center
+               gap-2 rounded-xl bg-blue-600
+                px-5 py-3 font-semibold 
+                text-white shadow-lg shadow-blue-600/20 
+                transition-all duration-200 
+                hover:-translate-y-0.5 hover:bg-blue-700 
+                hover:shadow-xl sm:w-fit"
             >
               <FiPlus size={18} />
               Create Campaign
@@ -121,36 +130,48 @@ function BrandDashboard() {
 
 
           {/* ================= HERO ================= */}
-          <section className="relative mt-8 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-6 text-white shadow-xl shadow-blue-600/20 sm:p-8 lg:p-10">
+          <section className="relative mt-8 overflow-hidden 
+          rounded-3xl bg-gradient-to-br 
+          from-blue-600 via-blue-700 to-indigo-700
+           p-6 text-white shadow-xl shadow-blue-600/20
+            sm:p-8 lg:p-10">
 
             {/* Decorative circles */}
-            <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-white/10 blur-2xl" />
+            <div className="absolute -right-20 -top-24 
+            h-72 w-72 rounded-full bg-white/10 blur-2xl" />
 
-            <div className="absolute -bottom-28 left-1/3 h-72 w-72 rounded-full bg-blue-300/10 blur-3xl" />
+            <div className="absolute -bottom-28 left-1/3 
+            h-72 w-72 rounded-full bg-blue-300/10 blur-3xl" />
 
-            <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="relative grid gap-8 
+            lg:grid-cols-[1fr_auto] lg:items-center">
 
               <div className="max-w-3xl">
 
-                <div className="flex items-center gap-2 text-sm font-medium text-blue-100">
+                <div className="flex items-center gap-2
+                 text-sm font-medium text-blue-100">
                   <FiTrendingUp size={17} />
                   Build your creator network
                 </div>
 
-                <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
+                <h2 className="mt-3 text-2xl font-bold 
+                tracking-tight sm:text-3xl lg:text-4xl">
                   Find creators who bring your campaigns to life.
                 </h2>
 
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-blue-100 sm:text-base">
+                <p className="mt-3 max-w-2xl text-sm
+                 leading-6 text-blue-100 sm:text-base">
                   Launch campaigns, review creator proposals, and build
                   long-term partnerships from one simple workspace.
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-3">
-
+                 
+               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <button
                     onClick={() => navigate("/create-campaign")}
-                    className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-700 shadow-sm transition hover:bg-blue-50"
+                    className="inline-flex items-center gap-2 
+                    rounded-xl bg-white px-5 py-3 text-sm font-semibold 
+                    text-blue-700 shadow-sm transition hover:bg-blue-50"
                   >
                     <FiPlus size={17} />
                     Start Campaign
@@ -158,7 +179,10 @@ function BrandDashboard() {
 
                   <button
                     onClick={() => navigate("/creators")}
-                    className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
+                    className="inline-flex items-center gap-2 
+                    rounded-xl border border-white/30 bg-white/10 
+                    px-5 py-3 text-sm font-semibold text-white 
+                    backdrop-blur-sm transition hover:bg-white/20"
                   >
                     <FiUsers size={17} />
                     Explore Creators
@@ -168,16 +192,20 @@ function BrandDashboard() {
               </div>
 
               {/* Profile card */}
-              <div className="w-full max-w-sm rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-md lg:w-72">
+              <div className="w-full max-w-sm rounded-2xl border 
+              border-white/15 bg-white/10 p-5 backdrop-blur-md 
+              lg:w-72">
 
                 <div className="flex items-center gap-4">
 
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-lg font-bold text-blue-700 shadow-md">
+                  <div className="flex h-14 w-14 items-center justify-center 
+                  rounded-2xl bg-white text-lg font-bold text-blue-700 shadow-md">
                     {user?.username?.charAt(0)?.toUpperCase() || "B"}
                   </div>
 
                   <div className="min-w-0">
-                    <p className="text-xs font-medium uppercase tracking-wider text-blue-100">
+                    <p className="text-xs font-medium uppercase 
+                    tracking-wider text-blue-100">
                       Signed in as
                     </p>
 
@@ -194,7 +222,10 @@ function BrandDashboard() {
 
                 <button
                   onClick={() => navigate("/brand-profile")}
-                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/20"
+                  className="mt-5 flex w-full items-center 
+                  justify-center gap-2 rounded-xl bg-white/10 px-4 
+                  py-2.5 text-sm font-semibold text-white transition 
+                  hover:bg-white/20"
                 >
                   <FiUser size={16} />
                   Manage Profile
@@ -211,7 +242,11 @@ function BrandDashboard() {
           <section className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
 
             {/* Active */}
-            <div className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50">
+            <div className="group relative overflow-hidden 
+            rounded-2xl border border-blue-100 bg-white 
+            p-6 shadow-sm transition-all duration-200 
+            hover:-translate-y-1 hover:border-blue-200 
+            hover:shadow-xl hover:shadow-blue-100/50">
 
               <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-full bg-blue-50" />
 
@@ -242,7 +277,10 @@ function BrandDashboard() {
 
 
             {/* Pending */}
-            <div className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50">
+            <div className="group relative overflow-hidden rounded-2xl
+             border border-blue-100 bg-white p-6 shadow-sm 
+             transition-all duration-200 hover:-translate-y-1 
+             hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50">
 
               <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-full bg-blue-50" />
 
@@ -258,13 +296,15 @@ function BrandDashboard() {
                   </h3>
                 </div>
 
-                <div className="rounded-xl bg-indigo-600 p-3 text-white shadow-lg shadow-indigo-600/20">
+                <div className="rounded-xl bg-indigo-600 p-3 
+                text-white shadow-lg shadow-indigo-600/20">
                   <FiClock size={21} />
                 </div>
 
               </div>
 
-              <div className="mt-5 flex items-center gap-2 text-xs font-medium text-indigo-600">
+              <div className="mt-5 flex items-center gap-2 text-xs 
+              font-medium text-indigo-600">
                 <span className="h-1.5 w-1.5 rounded-full bg-indigo-600" />
                 Waiting for review
               </div>
@@ -273,7 +313,10 @@ function BrandDashboard() {
 
 
             {/* Collaborations */}
-            <div className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50">
+            <div className="group relative overflow-hidden rounded-2xl border 
+            border-blue-100 bg-white p-6 shadow-sm transition-all 
+            duration-200 hover:-translate-y-1 hover:border-blue-200 
+            hover:shadow-xl hover:shadow-blue-100/50">
 
               <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-full bg-blue-50" />
 
@@ -304,7 +347,10 @@ function BrandDashboard() {
 
 
             {/* Completed */}
-            <div className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50">
+            <div className="group relative overflow-hidden rounded-2xl 
+            border border-blue-100 bg-white p-6 shadow-sm transition-all 
+            duration-200 hover:-translate-y-1 hover:border-blue-200 
+            hover:shadow-xl hover:shadow-blue-100/50">
 
               <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-full bg-blue-50" />
 
@@ -320,7 +366,8 @@ function BrandDashboard() {
                   </h3>
                 </div>
 
-                <div className="rounded-xl bg-blue-700 p-3 text-white shadow-lg shadow-blue-700/20">
+                <div className="rounded-xl bg-blue-700 p-3 text-white s
+                hadow-lg shadow-blue-700/20">
                   <FiCheckCircle size={21} />
                 </div>
 
@@ -359,22 +406,28 @@ function BrandDashboard() {
               {/* Create Campaign */}
               <button
                 onClick={() => navigate("/CreateCampaign")}
-                className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100/60"
+                className="group relative overflow-hidden rounded-2xl border
+                 border-blue-100 bg-white p-6 text-left shadow-sm 
+                 transition-all duration-200 hover:-translate-y-1 
+                 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100/60"
               >
 
-                <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-blue-50 transition group-hover:bg-blue-100" />
+                <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-blue-50 
+                transition group-hover:bg-blue-100" />
 
                 <div className="relative">
 
                   <div className="flex items-center justify-between">
 
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+                    <div className="flex h-12 w-12 items-center justify-center 
+                    rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
                       <FiPlus size={21} />
                     </div>
 
                     <FiArrowRight
                       size={20}
-                      className="text-slate-300 transition duration-200 group-hover:translate-x-1 group-hover:text-blue-600"
+                      className="text-slate-300 transition duration-200 
+                      group-hover:translate-x-1 group-hover:text-blue-600"
                     />
 
                   </div>
@@ -395,7 +448,10 @@ function BrandDashboard() {
               {/* Proposals */}
               <button
                 onClick={() => navigate("/campaigns")}
-                className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white p-6 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100/60"
+                className="group relative overflow-hidden rounded-2xl border 
+                border-blue-100 bg-white p-6 text-left shadow-sm transition-all 
+                duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl
+                 hover:shadow-blue-100/60"
               >
 
                 <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-blue-50 transition group-hover:bg-blue-100" />
@@ -446,7 +502,8 @@ function BrandDashboard() {
 
                     <FiArrowRight
                       size={20}
-                      className="text-slate-300 transition duration-200 group-hover:translate-x-1 group-hover:text-blue-600"
+                      className="text-slate-300 transition duration-200 group-hover:translate-x-1 
+                      group-hover:text-blue-600"
                     />
 
                   </div>
@@ -471,8 +528,7 @@ function BrandDashboard() {
           {/* ================= RECENT CAMPAIGNS ================= */}
           <section className="mt-10">
 
-            <div className="mb-5 flex items-end justify-between">
-
+                <div className="mb-5 flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-blue-600">
                   Campaigns
@@ -487,15 +543,25 @@ function BrandDashboard() {
                 </p>
               </div>
 
-              {campaigns.length > 0 && (
-                <button
-                  onClick={() => navigate("/campaigns")}
-                  className="hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 sm:flex"
-                >
-                  View all
-                  <FiArrowRight size={16} />
-                </button>
-              )}
+            {campaigns.length > 0 && (
+   <>
+    <button
+      onClick={() => navigate("/campaigns")}
+      className="hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 sm:flex"
+    >
+      View all
+      <FiArrowRight size={16} />
+    </button>
+
+    <button
+      onClick={() => navigate("/campaigns")}
+      className="flex items-center gap-1 text-sm font-semibold text-blue-600 sm:hidden"
+    >
+      View all
+      <FiArrowRight size={15} />
+    </button>
+  </>
+)}
 
             </div>
 
@@ -549,7 +615,9 @@ function BrandDashboard() {
                   return (
                     <div
                       key={campaign._id}
-                      className="group rounded-2xl border border-blue-100 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50"
+                      className="group rounded-2xl border border-blue-100 bg-white
+                       p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 
+                       hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50"
                     >
 
                       {/* Top */}
@@ -565,7 +633,7 @@ function BrandDashboard() {
                             </span>
                           </div>
 
-                          <h3 className="truncate text-xl font-bold text-slate-900">
+                          <h3 className="break-words text-lg font-bold text-slate-900 sm:text-xl">
                             {campaign.title}
                           </h3>
 
@@ -593,10 +661,12 @@ function BrandDashboard() {
 
 
                       {/* Details */}
-                      <div className="mt-6 grid grid-cols-2 gap-4 rounded-xl bg-blue-50/60 p-4">
+                      <div className="mt-6 grid grid-cols-2 gap-4 rounded-xl 
+                      bg-blue-50/60 p-4">
 
                         <div>
-                          <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                          <p className="text-xs font-medium uppercase tracking-wide 
+                          text-slate-400">
                             Budget
                           </p>
 
@@ -606,7 +676,8 @@ function BrandDashboard() {
                         </div>
 
                         <div>
-                          <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                          <p className="text-xs font-medium uppercase tracking-wide 
+                          text-slate-400">
                             Proposals
                           </p>
 
@@ -623,7 +694,10 @@ function BrandDashboard() {
                         onClick={() =>
                           navigate(`/campaign/${campaign._id}`)
                         }
-                        className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700 transition-all duration-200 hover:bg-blue-600 hover:text-white"
+                        className="mt-5 flex w-full items-center justify-center 
+                        gap-2 rounded-xl bg-blue-50 px-4 py-3 text-sm 
+                        font-semibold text-blue-700 transition-all duration-200 
+                        hover:bg-blue-600 hover:text-white"
                       >
                         Manage Campaign
                         <FiArrowRight
@@ -644,15 +718,20 @@ function BrandDashboard() {
 
 
           {/* ================= BOTTOM CTA ================= */}
-          <section className="relative mt-10 overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 p-6 text-white shadow-xl shadow-blue-600/20 sm:p-8">
+          <section className="relative mt-10 overflow-hidden rounded-3xl 
+          bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 p-6 
+          text-white shadow-xl shadow-blue-600/20 sm:p-8">
 
-            <div className="absolute -right-16 -top-20 h-60 w-60 rounded-full bg-white/10 blur-2xl" />
+            <div className="absolute -right-16 -top-20 h-60 w-60 rounded-full 
+            bg-white/10 blur-2xl" />
 
-            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center 
+            lg:justify-between">
 
               <div className="flex items-start gap-4">
 
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                <div className="flex h-12 w-12 shrink-0 items-center 
+                justify-center rounded-xl bg-white/15">
                   <FiUsers size={22} />
                 </div>
 
@@ -677,8 +756,10 @@ function BrandDashboard() {
 
               <button
                 onClick={() => navigate("/creators")}
-                className="inline-flex w-fit items-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-blue-700 shadow-md transition hover:bg-blue-50"
-              >
+             className="inline-flex w-full items-center 
+             justify-center gap-2 rounded-xl bg-white px-5
+              py-3 font-semibold text-blue-700 shadow-md 
+              transition hover:bg-blue-50 sm:w-fit">
                 Find Creators
                 <FiArrowRight size={17} />
               </button>
