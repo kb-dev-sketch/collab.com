@@ -20,7 +20,6 @@ import {
   FiMessageSquare,
   FiBriefcase,
   FiFileText,
-  FiCheckCircle,
   FiClock,
 } from "react-icons/fi";
 
