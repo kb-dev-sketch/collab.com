@@ -120,7 +120,8 @@ function CreatorProfileView() {
   return (
     <div className="flex min-h-screen bg-slate-50">
       <Sidebar />
-<main className="flex min-w-0 flex-1 items-center justify-center px-4 pb-6 pt-20 sm:p-6 lg:pt-6">        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
+      <main className="min-w-0 flex-1 pt-16 lg:pt-0">
+   <div className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
 
           {/* =====================================================
               PROFILE HERO
@@ -197,7 +198,7 @@ function CreatorProfileView() {
                 {/* Edit button */}
                 <Link
                   to="/creator-profile"
-                  className="inline-flex w-full  shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 shadow-lg transition hover:bg-blue-50 sm:w-fit"
+                  className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 sm:w-fit"
                 >
                   <FiEdit3 size={16} />
                   Edit Profile
@@ -567,33 +568,36 @@ function CreatorProfileView() {
           {/* =====================================================
               CTA
           ====================================================== */}
-          <div className="mt-6 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white shadow-xl shadow-blue-600/20 sm:p-8">
 
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm font-medium text-blue-100">
-                  Profile visibility
-                </p>
+<div className="mt-6 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white shadow-xl shadow-blue-600/20 sm:p-8">
+  <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
 
-                <h2 className="mt-1 text-xl font-bold">
-                  Keep your creator profile updated
-                </h2>
+    {/* CTA Content */}
+    <div className="min-w-0 flex-1">
+      <p className="text-xs font-semibold uppercase tracking-wider text-blue-100 sm:text-sm">
+        Profile visibility
+      </p>
 
-                <p className="mt-2 max-w-xl text-sm leading-6 text-blue-100">
-                  Add your latest work, social links and creator
-                  information to make your profile more complete.
-                </p>
-              </div>
+      <h2 className="mt-1 text-xl font-bold leading-snug sm:text-2xl">
+        Keep your creator profile updated
+      </h2>
 
-              <Link
-                to="/creator-profile"
-                className="inline-flex shrink-0  w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"
-              >
-                <FiEdit3 size={16} />
-                Edit Profile
-              </Link>
-            </div>
-          </div>
+      <p className="mt-2 max-w-2xl text-sm leading-6 text-blue-100">
+        Add your latest work, social links and creator information
+        to make your profile more complete.
+      </p>
+    </div>
+
+    {/* CTA Button */}
+    <Link
+      to="/creator-profile"
+      className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 shadow-sm transition hover:bg-blue-50 sm:w-fit"
+    >
+      <FiEdit3 size={16} />
+      Edit Profile
+    </Link>
+  </div>
+</div>
         </div>
       </main>
     </div>
