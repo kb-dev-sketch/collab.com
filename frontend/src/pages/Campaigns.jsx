@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import CampaignCard from "../components/campaignCard";
+import CampaignCard from "../components/CampaignCard";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 
