@@ -1,6 +1,6 @@
 import { Chat } from "../model/chat.model.js";
 import { Creator } from "../model/creatorProfile_model.js";
-import { Brand } from "../model/BrandProfile_model.js";
+import { Brand } from "../model/brandProfile_model.js";
 const registerChatEvents = (socket) => {
   socket.on("join-chat", async (chatId) => {
     try {
