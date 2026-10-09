@@ -6,7 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://collab-com.vercel.app/"],
+    origin: ["http://localhost:5173", "https://collab-com.vercel.app/api/v1"],
     credentials: true,
   }),
 );
