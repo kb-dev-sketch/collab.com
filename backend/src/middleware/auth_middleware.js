@@ -5,9 +5,12 @@ import { ApiError } from "../utils/ApiError.js";
 // res khali hai toh mai toh _ likh sakta hu
 export const verifyJWT = asyncHandler(async (req, _, next) => {
   console.log("verifyJWT Hit");
+  console.log("Cookies:", Object.keys(req.cookies || {}));
+  console.log("Authorization exists:", !!req.headers.authorization);
   const token =
     req.cookies?.accessToken ||
     req.header("authorization")?.replace("Bearer ", "");
+
   try {
     if (!token) {
       throw new ApiError(401, "Unauthorized request");
