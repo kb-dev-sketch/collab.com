@@ -24,15 +24,17 @@ function AuthProvider({ children }) {
   }, []);
 
   // log out 
-  const logout=async()=>{
-    try{
+  const logout = async () => {
+    try {
       await logoutUser();
-      setUser(null)
+    } catch (error) {
+      console.log(error);
+    } finally {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      setUser(null);
     }
-    catch(error){
-      console.log(error)
-    }
-  }
+  };
   return (
     <AuthContext.Provider
       value={{

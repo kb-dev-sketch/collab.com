@@ -13,7 +13,7 @@ const router = Router();
 router.route("/register").post(registerUser);
 router.route("/loginUser").post(loginUser);
 router.route("/logoutUser").post(verifyJWT, logoutUser);
-router.route("/refresh-Token").post(verifyJWT, refreshAccessToken);
+router.route("/refresh-Token").post(refreshAccessToken);
 router.route("/getUser").get(verifyJWT, getCurrentUser);
 router.route("/changePassword").patch(verifyJWT, changePassword);
 export { router as authRouter };

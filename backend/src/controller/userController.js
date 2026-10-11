@@ -4,6 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../model/user.model.js";
 import bcrypt from "bcrypt";
+import { authCookieOptions } from "../utils/cookieOptions.js";
 const generateAccessAndRefreshTokens = async (userId) => {
   console.log("Debug userId", userId);
   console.log("type", typeof userId);
@@ -87,20 +88,17 @@ const loginUser = asyncHandler(async (req, res) => {
     "-password -refreshToken",
   );
 
-  // send to cookies
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
   return res
     .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
+    .cookie("accessToken", accessToken, authCookieOptions)
+    .cookie("refreshToken", refreshToken, authCookieOptions)
     .json(
       new ApiResponse(
         200,
         {
           user: loggedInUser,
+          accessToken,
+          refreshToken,
         },
         "User logged In SuccessFull",
       ),
@@ -119,14 +117,10 @@ const logoutUser = asyncHandler(async (req, res) => {
       new: true,
     },
   );
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
   return res
     .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
+    .clearCookie("accessToken", authCookieOptions)
+    .clearCookie("refreshToken", authCookieOptions)
     .json(new ApiResponse(200, {}, "User logged out "));
 });
 
@@ -144,16 +138,12 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(401, "Refresh token is Invalid expired or used");
   }
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
   const { accessToken, refreshToken: newRefreshToken } =
     await generateAccessAndRefreshTokens(user._id);
   return res
     .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", newRefreshToken, options)
+    .cookie("accessToken", accessToken, authCookieOptions)
+    .cookie("refreshToken", newRefreshToken, authCookieOptions)
     .json(new ApiResponse(200, { accessToken, refreshToken: newRefreshToken }));
 });
 const getCurrentUser = asyncHandler(async (req, res) => {

@@ -41,17 +41,14 @@ function Login() {
 
       console.log("Login successful:", data);
 
-      localStorage.setItem(
-        "accessToken",
-        data.data.accessToken,
-      );
+      const { user: loggedInUser, accessToken, refreshToken } = data.data;
 
-      localStorage.setItem(
-        "refreshToken",
-        data.data.refreshToken,
-      );
+      if (!loggedInUser || !accessToken || !refreshToken) {
+        throw new Error("Login response missing user or tokens");
+      }
 
-      const loggedInUser = data.data.user;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
 
       setUser(loggedInUser);
 

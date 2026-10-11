@@ -24,6 +24,6 @@ export const getCurrentUser = async () => {
   return response.data;
 };
 export const ChangePassword = async (profileData) => {
-  const response = await API.patch("auth/changePassword", profileData);
+  const response = await API.patch("/auth/changePassword", profileData);
   return response.data;
 };
