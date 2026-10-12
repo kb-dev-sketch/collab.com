@@ -41,13 +41,13 @@ const createbrandProfile = asyncHandler(async (req, res) => {
 });
 const updatebrandProfile = asyncHandler(async (req, res) => {
   const allowedFields = [
-    companyName,
-    industry,
-    Companysize,
-    location,
-    socials,
-    website,
-    desciption,
+    "companyName",
+    "industry",
+    "Companysize",
+    "location",
+    "socials",
+    "website",
+    "description",
   ];
   const updateData = {};
   allowedFields.forEach((fields) => {
