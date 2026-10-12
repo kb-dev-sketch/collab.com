@@ -328,7 +328,7 @@ function BrandProposals() {
                   </p>
 
                   <button
-                    onClick={() => navigate("/create-campaign")}
+                    onClick={() => navigate("/CreateCampaign")}
                     className="mt-6 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700"
                   >
                     <FiPlus size={18} />
