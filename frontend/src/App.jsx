@@ -13,7 +13,7 @@ import SendProposal from "./pages/sendProposal";
 import CampaignProposals from "./pages/CampaignProposals";
 import BrandProposals from './pages/BrandProposals';
 import CreatorProposals from './pages/creatorProposals';
-import BrandProfile from './pages/brandProfile';
+import BrandProfile from './components/brandProfile';
 import BrandProfileView from './pages/BrandProfileview';
 import Notifications from './pages/Notifications';
 import Messages from './pages/Messages';
@@ -36,6 +36,16 @@ function App(){
       <CampaignDetails />
     </ProtectedRoute>
   }
+/>
+// 
+<Route
+  path="/brand-profile"
+  element={<BrandProfile mode="create" />}
+/>
+
+<Route
+  path="/brand-profile/edit"
+  element={<BrandProfile mode="edit" />}
 />
 
 <Route

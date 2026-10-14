@@ -221,7 +221,7 @@ function BrandDashboard() {
                 </div>
 
                 <button
-                  onClick={() => navigate("/brand-profile")}
+                  onClick={() => navigate("/brand-profile/edit")}
                   className="mt-5 flex w-full items-center 
                   justify-center gap-2 rounded-xl bg-white/10 px-4 
                   py-2.5 text-sm font-semibold text-white transition 

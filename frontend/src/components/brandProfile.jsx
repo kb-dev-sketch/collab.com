@@ -15,8 +15,8 @@ import {
   FiUsers,
 } from "react-icons/fi";
 
-import Sidebar from "../components/Sidebar";
-import { createBrandProfile } from "../services/brand";
+import Sidebar from "./Sidebar";
+import { createBrandProfile ,updatebrandProfile,getbrandProfile} from "../services/brand";
 
 
 // ======================================================
@@ -136,25 +136,92 @@ function CustomSelect({
 // MAIN COMPONENT
 // ======================================================
 
-function BrandProfile() {
+function BrandProfile({mode="create"}) {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+ 
+  const [fetchingProfile,setFetchingProfile] = useState(mode==="edit");
 
-  const [formData, setFormData] = useState({
-    companyName: "",
-    logo: "",
-    industry: "",
-    website: "",
-    description: "",
-    companySize: "1-10",
-    location: "",
+  const [profileLoaded, setProfileLoaded] = useState(mode==="create");
+  const [formError, setFormError] = useState(null);
+ const [formData,setFormData]= useState({
+  companyName: "",
+  logo: "",
+  industry: "",
+  website: "",
+  description: "",
+  companySize: "1-10",
+  location: "",
+  socials: {
+    instagram: "",
+    linkedin: "",
+    x: "",
+  },
+});
+
+  useEffect(()=>{
+    if(mode!=="edit"){
+      return ;
+    }
+    let cancelled =false;
+    const fetchingProfile=async()=>{
+    setFetchingProfile(true);
+    setFormError(null);
+    try{
+      const response = await getbrandProfile();
+
+console.log("Full API response:", response);
+console.log("Response data:", response?.data);
+console.log("Nested data:", response?.data?.data);
+const profile = response?.data;
+
+console.log("Brand profile:", profile);
+
+      if(!profile){
+        throw new Error("No brand profile found. Please create one first.");
+      }
+   if(cancelled) return ;
+
+ 
+  setFormData({
+    companyName: profile.companyName ?? "",
+    logo:  profile.logo ?? "",
+    industry: profile.industry ?? "",
+    website: profile.website ?? "",
+    description: profile.description ?? "",
+    companySize: profile.companySize ?? "1-10",
+    location: profile.location ?? "",
     socials: {
-      instagram: "",
-      linkedin: "",
-      x: "",
+      instagram: profile.socials?.instagram ?? "",
+      linkedin: profile.socials?.linkedin ?? "",
+      x: profile.socials?.x ?? "",
     },
   });
+  setProfileLoaded(true);
+
+}
+catch(error){
+  if(!cancelled){
+    setFormError(error?.
+      response?.data?.message
+       || error.message
+        || "Failed to fetch brand profile");
+  }
+
+}
+finally{
+   if (!cancelled) {
+        setFetchingProfile(false);
+      }
+}
+  }
+  fetchingProfile();
+  return ()=>{
+    cancelled=true;
+
+  };
+} ,[mode]);
 
 
   // ======================================================
@@ -225,28 +292,56 @@ function BrandProfile() {
   // ======================================================
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      setLoading(true);
+  setLoading(true);
+  setFormError(null);
 
+  try {
+    if (mode === "edit") {
+      await updatebrandProfile(formData);
+      alert("Brand profile updated successfully!");
+    } else {
       await createBrandProfile(formData);
-
       alert("Brand profile created successfully!");
-
-      navigate("/brand-dashboard");
-    } catch (error) {
-      console.error("Create brand profile error:", error);
-
-      alert(
-        error?.response?.data?.message ||
-          "Failed to create brand profile"
-      );
-    } finally {
-      setLoading(false);
     }
-  };
 
+    navigate("/brand-dashboard");
+  } catch (error) {
+    setFormError(
+      error?.response?.data?.message ||
+        "Failed to save brand profile"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
+if (fetchingProfile) {
+  return (
+    <div className="p-8 text-center">
+      Loading brand profile...
+    </div>
+  );
+}
+
+if (mode === "edit" && !profileLoaded) {
+  return (
+    <div className="p-8">
+      <p className="text-red-600">
+        {formError || "Unable to load brand profile."}
+      </p>
+
+      <button
+        type="button"
+        onClick={() => navigate("/brand-dashboard")}
+        className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white"
+      >
+        Back to dashboard
+      </button>
+    </div>
+  );
+}
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-white to-slate-50">
@@ -286,7 +381,11 @@ function BrandProfile() {
               HERO SECTION
           ================================================== */}
 
-          <section className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 p-6 text-white shadow-xl sm:p-8">
+          <section className="relative mb-8 
+          overflow-hidden rounded-3xl
+           bg-gradient-to-r from-blue-600 
+           via-blue-700 to-indigo-700 p-6 
+           text-white shadow-xl sm:p-8">
 
             {/* Decorative circles */}
 
@@ -297,7 +396,9 @@ function BrandProfile() {
 
             <div className="relative max-w-3xl">
 
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold backdrop-blur">
+              <div className="mb-4 inline-flex items-center gap-2 
+              rounded-full bg-white/10 px-3 py-1.5 
+              text-xs font-semibold backdrop-blur">
                 <FiBriefcase />
 
                 Brand Profile
@@ -305,7 +406,9 @@ function BrandProfile() {
 
 
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Build your brand presence
+            {mode === "edit"
+              ? "Edit your brand profile"
+            : "Build your brand presence"}
               </h1>
 
 
@@ -336,8 +439,14 @@ function BrandProfile() {
               onSubmit={handleSubmit}
               className="space-y-8 lg:col-span-2"
             >
-
-
+               {formError && (
+              <p
+                   role="alert"
+                   className="rounded-lg bg-red-50 p-3 text-sm text-red-600"
+                 >
+                   {formError}
+                 </p>
+               )}
               {/* ==================================================
                   COMPANY INFORMATION
               ================================================== */}
@@ -665,25 +774,23 @@ function BrandProfile() {
                 </button>
 
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition hover:bg-blue-700 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {loading ? (
-                    <>
-                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-
-                      Creating Profile...
-                    </>
-                  ) : (
-                    <>
-                      Create Brand Profile
-
-                      <FiArrowRight className="transition-transform group-hover:translate-x-1" />
-                    </>
-                  )}
-                </button>
+            <button
+     type="submit"
+    disabled={loading}
+    className="group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition hover:bg-blue-700 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+        >
+  {loading ? (
+    <>
+      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+      {mode === "edit" ? "Saving Changes..." : "Creating Profile..."}
+    </>
+  ) : (
+    <>
+      {mode === "edit" ? "Save Changes" : "Create Brand Profile"}
+      <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+    </>
+  )}
+</button>
 
               </div>
 

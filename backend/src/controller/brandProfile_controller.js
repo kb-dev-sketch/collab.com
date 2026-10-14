@@ -25,13 +25,13 @@ const createbrandProfile = asyncHandler(async (req, res) => {
 
   const createBrand = await Brand.create({
     userId: req.user._id,
-    companyName,
-    industry,
-    Companysize,
-    location,
-    socials,
-    website,
-    desciption,
+    companyName: companyName,
+    industry: industry,
+    Companysize: Companysize,
+    location: location,
+    socials: socials,
+    website: website,
+    description: desciption,
   });
   return res
     .status(200)
@@ -40,10 +40,15 @@ const createbrandProfile = asyncHandler(async (req, res) => {
     );
 });
 const updatebrandProfile = asyncHandler(async (req, res) => {
+  console.log("UPDATE BRAND PROFILE CALLED");
+  console.log("Request body:", req.body);
+  console.log("Logged-in user:", req.user?._id);
+
   const allowedFields = [
     "companyName",
+    "logo",
     "industry",
-    "Companysize",
+    "companySize",
     "location",
     "socials",
     "website",

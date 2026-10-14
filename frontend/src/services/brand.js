@@ -18,3 +18,12 @@ export const createBrandProfile = async (data) => {
     throw error;
   }
 };
+export const updatebrandProfile = async (data) => {
+  try {
+    const response = await API.patch("brands/updatebrandProfile", data);
+    return response.data;
+  } catch (error) {
+    console.error("error in updating brand Profile", error);
+    throw error;
+  }
+};

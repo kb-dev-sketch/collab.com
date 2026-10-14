@@ -177,7 +177,7 @@ function BrandProfileView() {
               </div>
 
               <button
-                onClick={() => navigate("/brand-profile")}
+                onClick={() => navigate("/brand-profile/edit")}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-700 shadow-lg transition hover:bg-blue-50 sm:w-fit"
               >
                 <FiEdit3 />
