@@ -57,17 +57,17 @@ const creatorProfile = asyncHandler(async (req, res) => {
 
 const update_creatorProfile = asyncHandler(async (req, res) => {
   const allowedFields = [
-    name,
-    niches,
-    profileImage,
-    bio,
-    city,
-    language,
-    socials,
-    followers,
-    engagementRate,
-    pricePerPost,
-    portfolioLinks,
+    "name",
+    "niches",
+    "profileImage",
+    "bio",
+    "city",
+    "language",
+    "socials",
+    "followers",
+    "engagementRate",
+    "pricePerPost",
+    "portfolioLinks",
   ];
   // build update Object
   const updateData = {};
